@@ -28,12 +28,12 @@ public class AvionService {
     }
 
     // 3. Leer un avión por ID (Devuelve un Optional para evitar NullPointerException)
-    public Optional<Avion> obtenerPorId(Long id) {
-        return avionRepository.findById(id);
+    public Optional<Avion> obtenerPorId(String matricula) {
+        return avionRepository.findById(matricula);
     }
 
     // 4. Eliminar un avión
-    public void eliminarAvion(Long id) {
-        avionRepository.deleteById(id);
+    public void eliminarAvion(String matricula) {
+        avionRepository.deleteById(matricula);
     }
 }
