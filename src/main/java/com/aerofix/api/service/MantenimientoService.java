@@ -16,19 +16,21 @@ public class MantenimientoService {
         this.mantenimientoRepository = mantenimientoRepository;
     }
 
-    public Mantenimiento guardarMantenimiento(Mantenimiento mantenimiento) {
-        return mantenimientoRepository.save(mantenimiento);
-    }
-
     public List<Mantenimiento> obtenerTodos() {
         return mantenimientoRepository.findAll();
     }
 
-    public Optional<Mantenimiento> obtenerPorId(Long id) {
-        return mantenimientoRepository.findById(id);
+    public Optional<Mantenimiento> obtenerPorId(String codigoOrigen) {
+        return mantenimientoRepository.findById(codigoOrigen);
     }
 
-    public void eliminar(Long id) {
-        mantenimientoRepository.deleteById(id);
+    public Mantenimiento guardarMantenimiento(Mantenimiento mantenimiento) {
+        // Aquí Spring JPA es listo: si el objeto 'mantenimiento' trae
+        // un objeto 'avion' con la matrícula rellena, él solo hace la unión.
+        return mantenimientoRepository.save(mantenimiento);
+    }
+
+    public void eliminarMantenimiento(String codigoOrigen) {
+        mantenimientoRepository.deleteById(codigoOrigen);
     }
 }
