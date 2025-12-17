@@ -10,7 +10,11 @@ import java.time.LocalDate;
 public class Pieza {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @NotBlank
+    @Column(unique = true)
     private String referencia; // String ID
 
     @NotBlank
