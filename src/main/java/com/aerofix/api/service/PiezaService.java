@@ -12,28 +12,46 @@ public class PiezaService {
 
     private final PiezaRepository piezaRepository;
 
-    // Inyección de dependencias por constructor
     public PiezaService(PiezaRepository piezaRepository) {
         this.piezaRepository = piezaRepository;
     }
 
-    // 1. Crear o Actualizar un avión
-    public Pieza guardarPieza(Pieza pieza) {
-        return piezaRepository.save(pieza);
-    }
-
-    // 2. Leer todos los aviones
-    public List<Pieza> obtenerTodos() {
+    public List<Pieza> obtenerTodas() {
         return piezaRepository.findAll();
     }
 
-    // 3. Leer un avión por ID (Devuelve un Optional para evitar NullPointerException)
+    // ID es String
+    public Optional<Pieza> obtenerPorReferencia(String referencia) {
+        return piezaRepository.findByReferencia(referencia);
+    }
+
+    // ID es String
     public Optional<Pieza> obtenerPorId(Long id) {
         return piezaRepository.findById(id);
     }
 
-    // 4. Eliminar un avión
+    public Pieza guardarPieza(Pieza pieza) {
+        return piezaRepository.save(pieza);
+    }
+
+    // ID es String
     public void eliminarPieza(Long id) {
         piezaRepository.deleteById(id);
+    }
+
+    // Método PUT
+    public Pieza actualizarPieza(Long id, Pieza nuevosDatos) {
+        return piezaRepository.findById(id)
+                .map(piezaExistente -> {
+                    piezaExistente.setReferencia(nuevosDatos.getReferencia());
+                    piezaExistente.setNombre(nuevosDatos.getNombre());
+                    piezaExistente.setStock(nuevosDatos.getStock());
+                    piezaExistente.setPrecioUnitario(nuevosDatos.getPrecioUnitario());
+                    piezaExistente.setEsCritica(nuevosDatos.isEsCritica());
+                    piezaExistente.setFechaUltimaRevision(nuevosDatos.getFechaUltimaRevision());
+                    // La referencia (ID) normalmente no se cambia
+                    return piezaRepository.save(piezaExistente);
+                })
+                .orElse(null);
     }
 }
