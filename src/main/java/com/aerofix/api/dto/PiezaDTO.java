@@ -12,4 +12,5 @@ public class PiezaDTO {
     private float precioUnitario;
     private boolean esCritica;
     private LocalDate fechaUltimaRevision;
+    private int piezasEmpleadas;
 }

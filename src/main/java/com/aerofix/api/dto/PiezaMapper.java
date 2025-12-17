@@ -17,6 +17,13 @@ public class PiezaMapper {
         dto.setPrecioUnitario(entity.getPrecioUnitario());
         dto.setEsCritica(entity.isEsCritica());
         dto.setFechaUltimaRevision(entity.getFechaUltimaRevision());
+
+        if (entity.getMantenimientosDondeSeUso() != null) {
+            dto.setPiezasEmpleadas(entity.getMantenimientosDondeSeUso().size());
+        } else {
+            dto.setPiezasEmpleadas(0);
+        }
+
         return dto;
     }
 }

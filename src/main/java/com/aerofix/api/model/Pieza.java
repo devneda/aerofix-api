@@ -29,4 +29,8 @@ public class Pieza {
     private boolean esCritica; // boolean
 
     private LocalDate fechaUltimaRevision; // fecha
+
+    @ManyToMany(mappedBy = "piezasEmpleadas")
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private java.util.List<Mantenimiento> mantenimientosDondeSeUso;
 }

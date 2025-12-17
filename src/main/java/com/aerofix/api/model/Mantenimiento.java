@@ -35,4 +35,12 @@ public class Mantenimiento {
     @ManyToOne
     @JoinColumn(name = "mecanico_id")
     private Mecanico mecanico;
+
+    @ManyToMany
+    @JoinTable(
+            name = "mantenimiento_piezas",
+            joinColumns = @JoinColumn(name = "mantenimiento_id"),
+            inverseJoinColumns = @JoinColumn(name = "pieza_id")
+    )
+    private java.util.List<Pieza> piezasEmpleadas;
 }
