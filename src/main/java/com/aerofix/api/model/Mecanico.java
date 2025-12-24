@@ -18,18 +18,23 @@ public class Mecanico {
     @Column(unique = true)
     private String licenciaId; // String identificativo
 
+    @Column(columnDefinition = "VARCHAR(50)")
     @NotBlank
     @Size(min = 2, max = 50)
     private String nombre;
 
+    @Column
     @Min(0) @Max(5)
     private int nivelExperiencia; // int
 
+    @Column
     @Positive
     private float salarioHora; // float
 
+    @Column
     private boolean disponible; // boolean
 
+    @Column
     @Temporal(TemporalType.DATE)
     private Date fechaContratacion; // fecha (java.util.Date para variar)
 

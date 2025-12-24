@@ -7,26 +7,20 @@ import org.springframework.stereotype.Component;
 public class MecanicoMapper {
 
     public MecanicoDTO toDTO(Mecanico entity) {
-        if (entity == null) {
-            return null;
-        }
+        if (entity == null) return null;
 
         MecanicoDTO dto = new MecanicoDTO();
-
-        // Asignación directa de tus campos reales
-        dto.setId(entity.getId());
         dto.setLicenciaId(entity.getLicenciaId());
         dto.setNombre(entity.getNombre());
         dto.setNivelExperiencia(entity.getNivelExperiencia());
         dto.setSalarioHora(entity.getSalarioHora());
-        dto.setDisponible(entity.isDisponible()); // Lombok usa 'is' para booleans
+        dto.setDisponible(entity.isDisponible());
         dto.setFechaContratacion(entity.getFechaContratacion());
 
-        // Calculamos el número de tareas (seguro y útil)
         if (entity.getMantenimientosAsignados() != null) {
-            dto.setNumeroMantenimientosAsignados(entity.getMantenimientosAsignados().size());
+            dto.setTotalMantenimientosAsignados(entity.getMantenimientosAsignados().size());
         } else {
-            dto.setNumeroMantenimientosAsignados(0);
+            dto.setTotalMantenimientosAsignados(0);
         }
 
         return dto;

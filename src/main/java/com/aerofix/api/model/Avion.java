@@ -15,17 +15,22 @@ public class Avion {
     @Pattern(regexp = "^[A-Z]{2}-\\d{3,4}$", message = "Formato de matrícula inválido (Ej: EC-123)") // Requisito: validación formato
     private String matricula;
 
+    @Column(columnDefinition = "VARCHAR(255)")
     @NotBlank(message = "El modelo es obligatorio")
     private String modelo;
 
+    @Column
     @Min(value = 1, message = "La capacidad debe ser positiva")
     private int capacidadPasajeros; // int
 
+    @Column
     @NotNull
     private float horasVuelo; // float
 
+    @Column
     private boolean enServicio; // boolean
 
+    @Column
     @PastOrPresent
     private LocalDate fechaFabricacion; // fecha
 

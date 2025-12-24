@@ -5,7 +5,6 @@ import java.util.Date;
 
 @Data
 public class MecanicoDTO {
-    private Long id;
     private String licenciaId;
     private String nombre;
     private int nivelExperiencia;
@@ -13,5 +12,6 @@ public class MecanicoDTO {
     private boolean disponible;
     private Date fechaContratacion;
 
-    private int numeroMantenimientosAsignados;
+    // Campo informativo
+    private int totalMantenimientosAsignados;
 }
