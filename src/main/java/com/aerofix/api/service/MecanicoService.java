@@ -1,48 +1,43 @@
 package com.aerofix.api.service;
 
+import com.aerofix.api.dto.MecanicoDTO;
+import com.aerofix.api.dto.MecanicoMapper;
 import com.aerofix.api.model.Mecanico;
 import com.aerofix.api.repository.MecanicoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MecanicoService {
 
     private final MecanicoRepository mecanicoRepository;
+    private final MecanicoMapper mecanicoMapper;
 
-    public MecanicoService(MecanicoRepository mecanicoRepository) {
+    public MecanicoService(MecanicoRepository mecanicoRepository, MecanicoMapper mecanicoMapper) {
         this.mecanicoRepository = mecanicoRepository;
+        this.mecanicoMapper = mecanicoMapper;
     }
 
-    public List<Mecanico> obtenerTodos() {
-        return mecanicoRepository.findAll();
+    public MecanicoDTO guardarMecanico(Mecanico mecanico) {
+        // Al guardar, devolvemos el DTO
+        Mecanico guardado = mecanicoRepository.save(mecanico);
+        return mecanicoMapper.toDTO(guardado);
     }
 
-    public Optional<Mecanico> obtenerPorId(Long id) {
-        return mecanicoRepository.findById(id);
+    public List<MecanicoDTO> buscarMecanicos(Boolean disponible, Integer experienciaMin, String nombre) {
+        // Llamada al método con Specifications
+        List<Mecanico> lista = mecanicoRepository.buscarConFiltros(disponible, experienciaMin, nombre);
+
+        return lista.stream()
+                .map(mecanicoMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    public Mecanico actualizarMecanico(Long id, Mecanico nuevosDatos) {
-        return mecanicoRepository.findById(id)
-                .map(mecanicoExistente -> {
-                    // Actualizamos campo a campo con los nuevos datos
-                    mecanicoExistente.setNombre(nuevosDatos.getNombre());
-                    mecanicoExistente.setLicenciaId(nuevosDatos.getLicenciaId());
-                    mecanicoExistente.setNivelExperiencia(nuevosDatos.getNivelExperiencia());
-                    mecanicoExistente.setSalarioHora(nuevosDatos.getSalarioHora());
-                    mecanicoExistente.setDisponible(nuevosDatos.isDisponible());
-                    mecanicoExistente.setFechaContratacion(nuevosDatos.getFechaContratacion());
-
-                    // Guardamos los cambios (JPA detecta que ya tiene ID y hace un UPDATE en vez de INSERT)
-                    return mecanicoRepository.save(mecanicoExistente);
-                })
-                .orElse(null); // Si no existe, devolvemos null (el controlador manejará el error 404)
-    }
-
-    public Mecanico guardarMecanico(Mecanico mecanico) {
-        return mecanicoRepository.save(mecanico);
+    public Optional<MecanicoDTO> obtenerPorId(Long id) {
+        return mecanicoRepository.findById(id).map(mecanicoMapper::toDTO);
     }
 
     public void eliminarMecanico(Long id) {

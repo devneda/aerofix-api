@@ -11,19 +11,25 @@ public class Mantenimiento {
 
     @Id
     @NotBlank
+    @Column(columnDefinition = "VARCHAR(255)")
     private String codigoOrden; // String ID manual
 
+    @Column(columnDefinition = "VARCHAR(500)")
     @Size(max = 500)
     private String descripcion;
 
+    @Column
     @Min(1)
     private int tiempoEstimadoHoras; // int
 
+    @Column
     @PositiveOrZero
     private float costeTotal; // float
 
+    @Column
     private boolean finalizado; // boolean
 
+    @Column
     @NotNull
     private LocalDateTime fechaEntrada; // fecha
 

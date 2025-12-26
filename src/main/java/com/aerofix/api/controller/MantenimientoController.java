@@ -1,52 +1,47 @@
 package com.aerofix.api.controller;
 
 import com.aerofix.api.dto.MantenimientoDTO;
-import com.aerofix.api.dto.MantenimientoMapper;
 import com.aerofix.api.model.Mantenimiento;
 import com.aerofix.api.service.MantenimientoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/mantenimientos")
 public class MantenimientoController {
 
     private final MantenimientoService mantenimientoService;
-    private final MantenimientoMapper mapper; // <--- Inyectamos el Mapper
 
-    public MantenimientoController(MantenimientoService mantenimientoService, MantenimientoMapper mapper) {
+    public MantenimientoController(MantenimientoService mantenimientoService) {
         this.mantenimientoService = mantenimientoService;
-        this.mapper = mapper;
     }
 
+    // GET único que maneja "traer todos" o "filtrar"
     @GetMapping
-    public List<MantenimientoDTO> obtenerTodos() {
-        // Convertimos la lista de Entidades a lista de DTOs
-        return mantenimientoService.obtenerTodos().stream()
-                .map(mapper::toDTO)
-                .collect(Collectors.toList());
+    public ResponseEntity<List<MantenimientoDTO>> obtenerMantenimientos(
+            @RequestParam(required = false) Boolean finalizado,
+            @RequestParam(required = false) Float costeMax,
+            @RequestParam(required = false) String descripcion
+    ) {
+        List<MantenimientoDTO> lista = mantenimientoService.buscarMantenimientos(finalizado, costeMax, descripcion);
+        return ResponseEntity.ok(lista);
     }
 
     @PostMapping
-    public MantenimientoDTO guardar(@RequestBody Mantenimiento mantenimiento) {
-        // Guardamos la entidad (como antes)
-        Mantenimiento guardado = mantenimientoService.guardarMantenimiento(mantenimiento);
-        // Pero devolvemos el DTO limpio
-        return mapper.toDTO(guardado);
+    public ResponseEntity<MantenimientoDTO> guardar(@RequestBody Mantenimiento mantenimiento) {
+        MantenimientoDTO guardado = mantenimientoService.guardarMantenimiento(mantenimiento);
+        return ResponseEntity.status(201).body(guardado);
     }
 
     @GetMapping("/{codigoOrden}")
     public ResponseEntity<MantenimientoDTO> obtenerPorId(@PathVariable String codigoOrden) {
         return mantenimientoService.obtenerPorId(codigoOrden)
-                .map(mapper::toDTO) // Convertimos a DTO si existe
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // El Delete no cambia porque no devuelve body
     @DeleteMapping("/{codigoOrden}")
     public ResponseEntity<Void> eliminar(@PathVariable String codigoOrden) {
         if (mantenimientoService.obtenerPorId(codigoOrden).isEmpty()) {

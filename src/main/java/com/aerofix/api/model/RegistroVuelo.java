@@ -13,20 +13,26 @@ public class RegistroVuelo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "VARCHAR(255)")
     @NotBlank
     private String codigoVuelo; // String
 
+    @Column(columnDefinition = "VARCHAR(255)")
     @NotBlank
     private String origenDestino;
 
+    @Column
     @Positive
     private int distanciaKm; // int
 
+    @Column
     @Positive
     private float combustibleConsumido; // float
 
+    @Column
     private boolean incidenciasReportadas; // boolean
 
+    @Column
     @PastOrPresent
     private LocalDate fechaVuelo; // fecha
 
