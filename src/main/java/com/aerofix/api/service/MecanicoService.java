@@ -22,11 +22,15 @@ public class MecanicoService {
     }
 
     public MecanicoDTO guardarMecanico(Mecanico mecanico) {
-        return mecanicoMapper.toDTO(mecanicoRepository.save(mecanico));
+        // Al guardar, devolvemos el DTO
+        Mecanico guardado = mecanicoRepository.save(mecanico);
+        return mecanicoMapper.toDTO(guardado);
     }
 
     public List<MecanicoDTO> buscarMecanicos(Boolean disponible, Integer experienciaMin, String nombre) {
+        // Llamada al método con Specifications
         List<Mecanico> lista = mecanicoRepository.buscarConFiltros(disponible, experienciaMin, nombre);
+
         return lista.stream()
                 .map(mecanicoMapper::toDTO)
                 .collect(Collectors.toList());

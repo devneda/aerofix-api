@@ -15,28 +15,24 @@ public class Mecanico {
     private Long id;
 
     @NotBlank(message = "El ID de licencia es obligatorio")
-    @Column(unique = true)
-    private String licenciaId; // String identificativo
+    @Column(unique = true, columnDefinition = "VARCHAR(255)")
+    private String licenciaId;
 
-    @Column(columnDefinition = "VARCHAR(50)")
     @NotBlank
     @Size(min = 2, max = 50)
+    @Column(columnDefinition = "VARCHAR(50)") // Forzamos texto
     private String nombre;
 
-    @Column
     @Min(0) @Max(5)
-    private int nivelExperiencia; // int
+    private int nivelExperiencia;
 
-    @Column
     @Positive
-    private float salarioHora; // float
+    private float salarioHora;
 
-    @Column
-    private boolean disponible; // boolean
+    private boolean disponible;
 
-    @Column
     @Temporal(TemporalType.DATE)
-    private Date fechaContratacion; // fecha (java.util.Date para variar)
+    private Date fechaContratacion;
 
     @OneToMany(mappedBy = "mecanico")
     private List<Mantenimiento> mantenimientosAsignados;

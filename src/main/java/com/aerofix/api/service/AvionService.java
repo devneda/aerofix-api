@@ -41,10 +41,10 @@ public class AvionService {
                 .map(avionMapper::toDTO);
     }
 
-    // Método para búsqueda con filtros
     public List<AvionDTO> buscarAviones(String modelo, Boolean enServicio, Float horasMax) {
-        List<Avion> resultados = avionRepository.buscarConFiltros(modelo, enServicio, horasMax);
-        // Reutilizamos el mapper para convertir la lista de entidades a DTOs
+        // Llamada directa al método default del repositorio
+        List<Avion> resultados = avionRepository.buscarConEspecificacion(modelo, enServicio, horasMax);
+
         return resultados.stream()
                 .map(avionMapper::toDTO)
                 .collect(Collectors.toList());
