@@ -748,7 +748,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"codigoVuelo\": \"IB-3400\",\r\n  \"origenDestino\": \"MAD-CDG\",\r\n  \"distanciaKm\": 1200,\r\n  \"combustibleConsumido\": 5000.5,\r\n  \"incidenciasReportadas\": false,\r\n  \"fechaVuelo\": \"2025-10-20\",\r\n  \"avion\": {\r\n    \"matricula\": \"ES-1024\" \r\n  }\r\n}",
+							"raw": "{\r\n    \"codigoVuelo\": \"IB-9999\",\r\n    \"origenDestino\": \"Madrid (MAD) - New York (JFK)\",\r\n    \"fechaSalida\": \"2025-06-20T14:00:00\",\r\n    \"fechaLlegada\": \"2025-06-20T22:00:00\",\r\n    \"distanciaKm\": 6000,\r\n    \"avion\": {\r\n        \"matricula\": \"EC-1234\" \r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
