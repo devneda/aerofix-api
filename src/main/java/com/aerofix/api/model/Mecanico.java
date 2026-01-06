@@ -20,16 +20,16 @@ public class Mecanico {
 
     @NotBlank
     @Size(min = 2, max = 50)
-    @Column(columnDefinition = "VARCHAR(50)") // Forzamos texto
+    @Column(columnDefinition = "VARCHAR(50)")
     private String nombre;
 
     @Min(0) @Max(5)
-    private int nivelExperiencia;
+    private Integer nivelExperiencia;
 
     @Positive
-    private float salarioHora;
+    private Float salarioHora;
 
-    private boolean disponible;
+    private Boolean disponible;
 
     @Temporal(TemporalType.DATE)
     private Date fechaContratacion;
