@@ -26,6 +26,10 @@ public class MecanicoService {
         return mapList(lista);
     }
 
+    public List<MecanicoDTO> buscarCarosYNuevos() {
+        return mapList(mecanicoRepository.findCarosYNuevos());
+    }
+
     // Obtener por ID
     public MecanicoDTO obtenerPorId(Long id) {
         Mecanico mecanico = mecanicoRepository.findById(id)

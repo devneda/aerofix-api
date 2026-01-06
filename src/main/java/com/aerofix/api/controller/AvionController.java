@@ -33,6 +33,11 @@ public class AvionController {
         return ResponseEntity.ok(avionService.buscarAviones(modelo, enServicio, horasMax));
     }
 
+    @GetMapping("/grandes")
+    public ResponseEntity<List<AvionDTO>> getAvionesGrandes() {
+        return ResponseEntity.ok(avionService.obtenerAvionesGrandes());
+    }
+
     @PostMapping
     public ResponseEntity<AvionDTO> guardarAvion(@Valid @RequestBody Avion avion) {
         return new ResponseEntity<>(avionService.guardarAvion(avion), HttpStatus.CREATED);

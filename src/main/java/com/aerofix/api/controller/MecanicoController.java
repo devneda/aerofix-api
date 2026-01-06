@@ -33,6 +33,11 @@ public class MecanicoController {
         return ResponseEntity.ok(mecanicoService.buscarMecanicos(disponible, experienciaMin, nombre));
     }
 
+    @GetMapping("/caros-nuevos")
+    public ResponseEntity<List<MecanicoDTO>> getCarosYNuevos() {
+        return ResponseEntity.ok(mecanicoService.buscarCarosYNuevos());
+    }
+
     @PostMapping
     public ResponseEntity<MecanicoDTO> guardarMecanico(@Valid @RequestBody Mecanico mecanico) {
         return new ResponseEntity<>(mecanicoService.guardarMecanico(mecanico), HttpStatus.CREATED);

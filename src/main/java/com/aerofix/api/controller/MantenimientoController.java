@@ -43,6 +43,15 @@ public class MantenimientoController {
         return ResponseEntity.ok(mantenimientoService.obtenerPorId(codigoOrden));
     }
 
+    @GetMapping("/gasto-total")
+    public ResponseEntity<Map<String, Double>> getGastoTotal() {
+        Double total = mantenimientoService.obtenerGastoTotalFinalizados();
+        // Devolvemos un pequeño JSON {"total": 1500.50}
+        Map<String, Double> respuesta = new HashMap<>();
+        respuesta.put("total", total != null ? total : 0.0);
+        return ResponseEntity.ok(respuesta);
+    }
+
     @PutMapping("/{codigoOrden}")
     public ResponseEntity<MantenimientoDTO> modificar(@PathVariable String codigoOrden, @RequestBody Mantenimiento mantenimiento) {
         return ResponseEntity.ok(mantenimientoService.modificarMantenimiento(codigoOrden, mantenimiento));

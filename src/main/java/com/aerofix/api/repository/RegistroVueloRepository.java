@@ -21,7 +21,7 @@ public interface RegistroVueloRepository extends JpaRepository<RegistroVuelo, Lo
     List<RegistroVuelo> findVuelosTransoceanicos();
 
     // SQL NATIVO: Vuelos con incidencias reportadas
-    @Query(value = "SELECT * FROM registroVuelo WHERE incidencias_reportadas = true", nativeQuery = true)
+    @Query(value = "SELECT * FROM registro_vuelo WHERE incidencias_reportadas = true", nativeQuery = true)
     List<RegistroVuelo> findVuelosConIncidenciasNativo();
 
     // SPECIFICATIONS (Filtros dinámicos)

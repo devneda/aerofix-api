@@ -26,6 +26,15 @@ public class AvionService {
         return modelMapper.map(guardado, AvionDTO.class);
     }
 
+    public List<AvionDTO> obtenerAvionesGrandes() {
+        // Llamamos a la consulta nativa del repositorio
+        List<Avion> aviones = avionRepository.findAvionesGrandesNativo();
+        // Convertimos la lista de Entidades a DTOs (asumiendo que tienes un método o mapper para esto)
+        return aviones.stream()
+                .map(avion -> modelMapper.map(avion, AvionDTO.class)) // O tu método toDTO(avion)
+                .toList();
+    }
+
     // Buscar con filtros (Especificaciones)
     public List<AvionDTO> buscarAviones(String modelo, Boolean enServicio, Float horasMax) {
         List<Avion> resultados = avionRepository.buscarConEspecificacion(modelo, enServicio, horasMax);

@@ -21,7 +21,7 @@ public interface AvionRepository extends JpaRepository<Avion, String>, JpaSpecif
     List<Avion> findAvionesMuyUsados(float horas);
 
     // SQL NATIVO
-    @Query(value = "SELECT * FROM avion_final WHERE capacidad_pasajeros > 150", nativeQuery = true)
+    @Query(value = "SELECT * FROM avion WHERE capacidad_pasajeros > 150", nativeQuery = true)
     List<Avion> findAvionesGrandesNativo();
 
     // Se usa Specifications para filtrado dinámico.
