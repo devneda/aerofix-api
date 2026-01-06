@@ -625,7 +625,29 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/piezas?nombre=Filtro&esCritica=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"piezas"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "Filtro"
+								},
+								{
+									"key": "esCritica",
+									"value": "false"
+								}
+							]
+						}
 					},
 					"response": []
 				}
