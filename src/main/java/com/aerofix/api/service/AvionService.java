@@ -1,56 +1,68 @@
 package com.aerofix.api.service;
 
 import com.aerofix.api.dto.AvionDTO;
-import com.aerofix.api.dto.AvionMapper;
+import com.aerofix.api.exception.AvionNotFoundException;
 import com.aerofix.api.model.Avion;
 import com.aerofix.api.repository.AvionRepository;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class AvionService {
 
-    private final AvionRepository avionRepository;
-    private final AvionMapper avionMapper; // Inyectamos el mapper
+    @Autowired
+    private AvionRepository avionRepository;
 
-    public AvionService(AvionRepository avionRepository, AvionMapper avionMapper) {
-        this.avionRepository = avionRepository;
-        this.avionMapper = avionMapper;
-    }
+    @Autowired
+    private ModelMapper modelMapper; // ¡Magia!
 
-    // Guardar (Mantenemos input entidad para simplificar el POST por ahora,
-    // pero devolvemos DTO para confirmar lo guardado)
+    // Guardar
     public AvionDTO guardarAvion(Avion avion) {
         Avion guardado = avionRepository.save(avion);
-        return avionMapper.toDTO(guardado);
+        return modelMapper.map(guardado, AvionDTO.class);
     }
 
-    // Obtener todos -> Devuelve lista de DTOs
-    public List<AvionDTO> obtenerTodos() {
-        return avionRepository.findAll().stream()
-                .map(avionMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-
-    // Obtener por ID -> Devuelve Optional<AvionDTO>
-    public Optional<AvionDTO> obtenerPorId(String matricula) {
-        return avionRepository.findById(matricula)
-                .map(avionMapper::toDTO);
-    }
-
+    // Buscar con filtros (Especificaciones)
     public List<AvionDTO> buscarAviones(String modelo, Boolean enServicio, Float horasMax) {
-        // Llamada directa al método default del repositorio
         List<Avion> resultados = avionRepository.buscarConEspecificacion(modelo, enServicio, horasMax);
+        // Truco de ModelMapper para listas
+        return modelMapper.map(resultados, new TypeToken<List<AvionDTO>>() {}.getType());
+    }
 
-        return resultados.stream()
-                .map(avionMapper::toDTO)
-                .collect(Collectors.toList());
+    // Obtener por ID (Lanzando Excepción Custom)
+    public AvionDTO obtenerPorId(String matricula) {
+        Avion avion = avionRepository.findById(matricula)
+                .orElseThrow(() -> new AvionNotFoundException("El avión con matrícula " + matricula + " no existe"));
+
+        return modelMapper.map(avion, AvionDTO.class);
+    }
+
+    // Modificar (Estilo Profesor: Patching)
+    public AvionDTO modificarAvion(String matricula, Avion avionDatosNuevos) {
+        Avion avionExistente = avionRepository.findById(matricula)
+                .orElseThrow(() -> new AvionNotFoundException("Avión no encontrado"));
+
+        // Esto copia las propiedades que vengan en 'avionDatosNuevos' sobre 'avionExistente'
+        modelMapper.map(avionDatosNuevos, avionExistente);
+        // Aseguramos que la ID no cambie
+        avionExistente.setMatricula(matricula);
+
+        Avion guardado = avionRepository.save(avionExistente);
+        return modelMapper.map(guardado, AvionDTO.class);
     }
 
     public void eliminarAvion(String matricula) {
-        avionRepository.deleteById(matricula);
+        Avion avion = avionRepository.findById(matricula)
+                .orElseThrow(AvionNotFoundException::new);
+        avionRepository.delete(avion);
+    }
+
+    // Métodos EXTRA para probar JPQL y Nativo
+    public List<AvionDTO> buscarMuyUsados(float horas) {
+        return modelMapper.map(avionRepository.findAvionesMuyUsados(horas), new TypeToken<List<AvionDTO>>() {}.getType());
     }
 }
