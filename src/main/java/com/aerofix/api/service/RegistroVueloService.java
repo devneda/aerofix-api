@@ -1,55 +1,113 @@
 package com.aerofix.api.service;
 
+import com.aerofix.api.dto.RegistroVueloDTO;
+import com.aerofix.api.exception.VueloNotFoundException;
+import com.aerofix.api.model.Avion; // Importante
 import com.aerofix.api.model.RegistroVuelo;
+import com.aerofix.api.repository.AvionRepository; // Importante
 import com.aerofix.api.repository.RegistroVueloRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional; // Recomendado
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RegistroVueloService {
 
-    private final RegistroVueloRepository registroVueloRepository;
+    @Autowired
+    private RegistroVueloRepository registroVueloRepository;
 
-    public RegistroVueloService(RegistroVueloRepository registroVueloRepository) {
-        this.registroVueloRepository = registroVueloRepository;
+    @Autowired
+    private AvionRepository avionRepository; // <--- 1. INYECTAR ESTO
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    // Buscar con filtros
+    public List<RegistroVueloDTO> buscarVuelos(String destino, Boolean incidencias, String codigo) {
+        List<RegistroVuelo> lista = registroVueloRepository.buscarConFiltros(destino, incidencias, codigo);
+        return mapList(lista);
     }
 
-    public List<RegistroVuelo> obtenerTodos() {
-        return registroVueloRepository.findAll();
+    public RegistroVueloDTO obtenerPorId(Long id) {
+        RegistroVuelo vuelo = registroVueloRepository.findById(id)
+                .orElseThrow(() -> new VueloNotFoundException("Vuelo ID " + id + " no encontrado"));
+        return toDTO(vuelo);
     }
 
-    public Optional<RegistroVuelo> obtenerPorId(Long id) {
-        return registroVueloRepository.findById(id);
+    @Transactional // <--- Buena práctica para asegurar la operación
+    public RegistroVueloDTO guardar(RegistroVuelo vuelo) {
+        // 2. LÓGICA PARA ASOCIAR EL AVIÓN REAL
+
+        // Verificamos que venga información del avión
+        if (vuelo.getAvion() == null || vuelo.getAvion().getMatricula() == null) {
+            throw new IllegalArgumentException("Es necesario especificar la matrícula del avión.");
+        }
+
+        String matricula = vuelo.getAvion().getMatricula();
+
+        // Buscamos el avión real en la BBDD usando la matrícula
+        Avion avionReal = avionRepository.findById(matricula)
+                .orElseThrow(() -> new VueloNotFoundException("No existe ningún avión con la matrícula: " + matricula));
+
+        // Reemplazamos el objeto "falso" que venía del JSON por el objeto "real" de la BBDD
+        vuelo.setAvion(avionReal);
+
+        // Ahora sí, guardamos. Hibernate ya está feliz porque el avión es una entidad gestionada.
+        return toDTO(registroVueloRepository.save(vuelo));
     }
 
-    public RegistroVuelo guardar(RegistroVuelo vuelo) {
-        return registroVueloRepository.save(vuelo);
+    // PATCH (Actualizar)
+    @Transactional
+    public RegistroVueloDTO actualizar(Long id, RegistroVuelo nuevosDatos) {
+        RegistroVuelo existente = registroVueloRepository.findById(id)
+                .orElseThrow(VueloNotFoundException::new);
+
+        // Copia inteligente (ignora nulos)
+        modelMapper.map(nuevosDatos, existente);
+
+        // Si en la actualización intentan cambiar el avión, también hay que buscarlo
+        if (nuevosDatos.getAvion() != null && nuevosDatos.getAvion().getMatricula() != null) {
+            String nuevaMatricula = nuevosDatos.getAvion().getMatricula();
+            Avion avionNuevo = avionRepository.findById(nuevaMatricula)
+                    .orElseThrow(() -> new VueloNotFoundException("Avión no encontrado: " + nuevaMatricula));
+            existente.setAvion(avionNuevo);
+        }
+
+        // Forzamos que el ID no cambie por seguridad
+        existente.setId(id);
+
+        return toDTO(registroVueloRepository.save(existente));
     }
 
     public void eliminar(Long id) {
+        if (!registroVueloRepository.existsById(id)) {
+            throw new VueloNotFoundException();
+        }
         registroVueloRepository.deleteById(id);
     }
 
-    // Método PUT
-    public RegistroVuelo actualizar(Long id, RegistroVuelo nuevosDatos) {
-        return registroVueloRepository.findById(id)
-                .map(vueloExistente -> {
-                    vueloExistente.setCodigoVuelo(nuevosDatos.getCodigoVuelo());
-                    vueloExistente.setOrigenDestino(nuevosDatos.getOrigenDestino());
-                    vueloExistente.setDistanciaKm(nuevosDatos.getDistanciaKm());
-                    vueloExistente.setCombustibleConsumido(nuevosDatos.getCombustibleConsumido());
-                    vueloExistente.setIncidenciasReportadas(nuevosDatos.isIncidenciasReportadas());
-                    vueloExistente.setFechaVuelo(nuevosDatos.getFechaVuelo());
+    // Métodos Extra
+    public List<RegistroVueloDTO> obtenerVuelosLargos() {
+        return mapList(registroVueloRepository.findVuelosTransoceanicos());
+    }
 
-                    // Permitir cambiar el avión de un vuelo ya registrado:
-                    if (nuevosDatos.getAvion() != null) {
-                        vueloExistente.setAvion(nuevosDatos.getAvion());
-                    }
+    public List<RegistroVueloDTO> obtenerVuelosConIncidencias() {
+        return mapList(registroVueloRepository.findVuelosConIncidenciasNativo());
+    }
 
-                    return registroVueloRepository.save(vueloExistente);
-                })
-                .orElse(null);
+    // Helpers
+    private RegistroVueloDTO toDTO(RegistroVuelo entity) {
+        RegistroVueloDTO dto = modelMapper.map(entity, RegistroVueloDTO.class);
+        if (entity.getAvion() != null) {
+            dto.setMatriculaAvion(entity.getAvion().getMatricula());
+        }
+        return dto;
+    }
+
+    private List<RegistroVueloDTO> mapList(List<RegistroVuelo> list) {
+        return list.stream().map(this::toDTO).toList();
     }
 }
