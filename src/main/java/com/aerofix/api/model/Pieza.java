@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -13,29 +14,28 @@ public class Pieza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "La referencia es obligatoria")
     @Column(unique = true, columnDefinition = "VARCHAR(255)")
-    private String referencia; // String ID
+    private String referencia;
 
     @Column(columnDefinition = "VARCHAR(255)")
-    @NotBlank
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
     @Column
     @Min(0)
-    private int stock; // int
+    private Integer stock; // Wrapper
 
     @Column
     @Positive
-    private float precioUnitario; // float
+    private Float precioUnitario; // Wrapper
 
     @Column
-    private boolean esCritica; // boolean
+    private Boolean esCritica; // Wrapper
 
     @Column
-    private LocalDate fechaUltimaRevision; // fecha
+    private LocalDate fechaUltimaRevision;
 
     @ManyToMany(mappedBy = "piezasEmpleadas")
-    @com.fasterxml.jackson.annotation.JsonIgnore
-    private java.util.List<Mantenimiento> mantenimientosDondeSeUso;
+    private List<Mantenimiento> mantenimientosDondeSeUso;
 }

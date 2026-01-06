@@ -1,57 +1,74 @@
 package com.aerofix.api.service;
 
+import com.aerofix.api.dto.PiezaDTO;
+import com.aerofix.api.exception.PiezaNotFoundException;
 import com.aerofix.api.model.Pieza;
 import com.aerofix.api.repository.PiezaRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PiezaService {
 
-    private final PiezaRepository piezaRepository;
+    @Autowired
+    private PiezaRepository piezaRepository;
 
-    public PiezaService(PiezaRepository piezaRepository) {
-        this.piezaRepository = piezaRepository;
+    @Autowired
+    private ModelMapper modelMapper; // Magia aquí
+
+    // Buscar con filtros
+    public List<PiezaDTO> buscarPiezas(String nombre, Boolean esCritica, Float precioMax) {
+        List<Pieza> lista = piezaRepository.buscarConFiltros(nombre, esCritica, precioMax);
+        return mapList(lista);
     }
 
-    public List<Pieza> obtenerTodas() {
-        return piezaRepository.findAll();
+    public PiezaDTO obtenerPorId(Long id) {
+        Pieza pieza = piezaRepository.findById(id)
+                .orElseThrow(() -> new PiezaNotFoundException("Pieza con ID " + id + " no encontrada"));
+        return toDTO(pieza);
     }
 
-    // ID es String
-    public Optional<Pieza> obtenerPorReferencia(String referencia) {
-        return piezaRepository.findByReferencia(referencia);
+    public PiezaDTO guardarPieza(Pieza pieza) {
+        return toDTO(piezaRepository.save(pieza));
     }
 
-    // ID es String
-    public Optional<Pieza> obtenerPorId(Long id) {
-        return piezaRepository.findById(id);
+    // PATCH (Modificar)
+    public PiezaDTO modificarPieza(Long id, Pieza nuevosDatos) {
+        Pieza existente = piezaRepository.findById(id)
+                .orElseThrow(PiezaNotFoundException::new);
+
+        // Copia ignorando nulos (gracias a config de AppConfig)
+        modelMapper.map(nuevosDatos, existente);
+        existente.setId(id); // Proteger ID
+
+        return toDTO(piezaRepository.save(existente));
     }
 
-    public Pieza guardarPieza(Pieza pieza) {
-        return piezaRepository.save(pieza);
-    }
-
-    // ID es String
     public void eliminarPieza(Long id) {
+        if (!piezaRepository.existsById(id)) {
+            throw new PiezaNotFoundException();
+        }
         piezaRepository.deleteById(id);
     }
 
-    // Método PUT
-    public Pieza actualizarPieza(Long id, Pieza nuevosDatos) {
-        return piezaRepository.findById(id)
-                .map(piezaExistente -> {
-                    piezaExistente.setReferencia(nuevosDatos.getReferencia());
-                    piezaExistente.setNombre(nuevosDatos.getNombre());
-                    piezaExistente.setStock(nuevosDatos.getStock());
-                    piezaExistente.setPrecioUnitario(nuevosDatos.getPrecioUnitario());
-                    piezaExistente.setEsCritica(nuevosDatos.isEsCritica());
-                    piezaExistente.setFechaUltimaRevision(nuevosDatos.getFechaUltimaRevision());
-                    // La referencia (ID) normalmente no se cambia
-                    return piezaRepository.save(piezaExistente);
-                })
-                .orElse(null);
+    // Métodos Extra
+    public List<PiezaDTO> obtenerStockBajo() {
+        return mapList(piezaRepository.findStockBajoNativo());
+    }
+
+    // Helpers
+    private PiezaDTO toDTO(Pieza entity) {
+        PiezaDTO dto = modelMapper.map(entity, PiezaDTO.class);
+        if (entity.getMantenimientosDondeSeUso() != null) {
+            dto.setPiezasEmpleadas(entity.getMantenimientosDondeSeUso().size());
+        }
+        return dto;
+    }
+
+    private List<PiezaDTO> mapList(List<Pieza> list) {
+        return list.stream().map(this::toDTO).toList();
     }
 }
