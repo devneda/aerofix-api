@@ -128,6 +128,18 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "grandes",
+					"id": "49958330-fdefe9fb-839f-4e6c-84c9-b19f7fef40d4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			],
 			"id": "49958330-6063267a-452c-4fd9-be91-391c2a569728"
