@@ -588,7 +588,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"precioUnitario\": 999.99\r\n}",
+							"raw": "{\r\n    \"precioUnitario\": 1000.00,\r\n    \"esCritica\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
