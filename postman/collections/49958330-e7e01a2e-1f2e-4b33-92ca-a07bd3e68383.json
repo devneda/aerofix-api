@@ -183,7 +183,7 @@
 							"variable": [
 								{
 									"key": "mantenimientoId",
-									"value": "MANT-2025-001"
+									"value": "ORD-2025-001"
 								}
 							]
 						}
@@ -285,8 +285,36 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion\": \"Revisión completa de frenos FINALIZADA\",\r\n    \"costeTotal\": 2000.00,\r\n    \"finalizado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/mantenimientos/:mantenimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mantenimientos",
+								":mantenimiento"
+							],
+							"variable": [
+								{
+									"key": "mantenimiento",
+									"value": "ORD-NUEVA-01"
+								}
+							]
+						}
 					},
 					"response": []
 				}
