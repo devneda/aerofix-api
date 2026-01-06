@@ -19,15 +19,15 @@ public class Mantenimiento {
     private String descripcion;
 
     @Column
-    @Min(1)
-    private int tiempoEstimadoHoras; // int
+    @Min(value = 1, message = "El tiempo estimado debe ser mínimo 1 hora")
+    private Integer tiempoEstimadoHoras; // int
 
     @Column
     @PositiveOrZero
-    private float costeTotal; // float
+    private Float costeTotal; // float
 
     @Column
-    private boolean finalizado; // boolean
+    private Boolean finalizado; // boolean
 
     @Column
     @NotNull
