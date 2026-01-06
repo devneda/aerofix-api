@@ -1,46 +1,79 @@
 package com.aerofix.api.service;
 
 import com.aerofix.api.dto.MecanicoDTO;
-import com.aerofix.api.dto.MecanicoMapper;
+import com.aerofix.api.exception.MecanicoNotFoundException;
 import com.aerofix.api.model.Mecanico;
 import com.aerofix.api.repository.MecanicoRepository;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class MecanicoService {
 
-    private final MecanicoRepository mecanicoRepository;
-    private final MecanicoMapper mecanicoMapper;
+    @Autowired
+    private MecanicoRepository mecanicoRepository;
 
-    public MecanicoService(MecanicoRepository mecanicoRepository, MecanicoMapper mecanicoMapper) {
-        this.mecanicoRepository = mecanicoRepository;
-        this.mecanicoMapper = mecanicoMapper;
-    }
+    @Autowired
+    private ModelMapper modelMapper; // Usamos el Bean de AppConfig
 
-    public MecanicoDTO guardarMecanico(Mecanico mecanico) {
-        // Al guardar, devolvemos el DTO
-        Mecanico guardado = mecanicoRepository.save(mecanico);
-        return mecanicoMapper.toDTO(guardado);
-    }
-
+    // Buscar (Specifications)
     public List<MecanicoDTO> buscarMecanicos(Boolean disponible, Integer experienciaMin, String nombre) {
-        // Llamada al método con Specifications
         List<Mecanico> lista = mecanicoRepository.buscarConFiltros(disponible, experienciaMin, nombre);
-
-        return lista.stream()
-                .map(mecanicoMapper::toDTO)
-                .collect(Collectors.toList());
+        return mapList(lista);
     }
 
-    public Optional<MecanicoDTO> obtenerPorId(Long id) {
-        return mecanicoRepository.findById(id).map(mecanicoMapper::toDTO);
+    // Obtener por ID
+    public MecanicoDTO obtenerPorId(Long id) {
+        Mecanico mecanico = mecanicoRepository.findById(id)
+                .orElseThrow(() -> new MecanicoNotFoundException("Mecánico con ID " + id + " no encontrado"));
+        return toDTO(mecanico);
+    }
+
+    // Guardar
+    public MecanicoDTO guardarMecanico(Mecanico mecanico) {
+        Mecanico guardado = mecanicoRepository.save(mecanico);
+        return toDTO(guardado);
+    }
+
+    // Modificar (PATCH)
+    public MecanicoDTO modificarMecanico(Long id, Mecanico nuevosDatos) {
+        Mecanico existente = mecanicoRepository.findById(id)
+                .orElseThrow(MecanicoNotFoundException::new);
+
+        // Copiamos datos nuevos sobre el viejo (ignora nulos gracias a AppConfig)
+        modelMapper.map(nuevosDatos, existente);
+        existente.setId(id); // Aseguramos ID
+
+        return toDTO(mecanicoRepository.save(existente));
     }
 
     public void eliminarMecanico(Long id) {
+        if (!mecanicoRepository.existsById(id)) {
+            throw new MecanicoNotFoundException();
+        }
         mecanicoRepository.deleteById(id);
+    }
+
+    // Métodos Extra
+    public List<MecanicoDTO> buscarExpertos() {
+        return mapList(mecanicoRepository.findExpertosDisponibles());
+    }
+
+    // Helpers privados para mapeo limpio
+    private MecanicoDTO toDTO(Mecanico entity) {
+        MecanicoDTO dto = modelMapper.map(entity, MecanicoDTO.class);
+        // Ajuste manual para el contador de mantenimientos (si hiciera falta)
+        if (entity.getMantenimientosAsignados() != null) {
+            dto.setTotalMantenimientosAsignados(entity.getMantenimientosAsignados().size());
+        }
+        return dto;
+    }
+
+    private List<MecanicoDTO> mapList(List<Mecanico> list) {
+        return list.stream().map(this::toDTO).toList();
     }
 }
