@@ -650,6 +650,18 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "stock-bajo",
+					"id": "49958330-9274638e-1096-46e1-86f7-1e60d8a9eb20",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			],
 			"id": "49958330-b0e7ffa2-80e1-4516-92bc-d359c67591bf"
