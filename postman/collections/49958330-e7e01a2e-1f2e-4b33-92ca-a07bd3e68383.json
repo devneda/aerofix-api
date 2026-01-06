@@ -216,35 +216,14 @@
 					"response": []
 				},
 				{
-					"name": "mantenimientos",
-					"id": "49958330-5678e4de-03b1-4549-9b06-c8cd9e6abfc9",
+					"name": "gasto-total",
+					"id": "49958330-4c91bc40-45a4-4fc2-883f-2d20e17cc689",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"codigoOrden\": \"ORD-NUEVA-01\",\r\n    \"descripcion\": \"Revisión completa de frenos y aceite\",\r\n    \"tiempoEstimadoHoras\": 5,\r\n    \"costeTotal\": 1500.50,\r\n    \"finalizado\": false,\r\n    \"fechaEntrada\": \"2025-01-20T08:00:00\",\r\n    \"avion\": {\r\n        \"matricula\": \"EC-1234\"\r\n    },\r\n    \"mecanico\": {\r\n        \"id\": 1\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/mantenimientos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mantenimientos"
-							]
-						}
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				},
@@ -298,6 +277,39 @@
 									"key": "descripcion",
 									"value": "frenos"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mantenimientos",
+					"id": "49958330-5678e4de-03b1-4549-9b06-c8cd9e6abfc9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoOrden\": \"ORD-NUEVA-01\",\r\n    \"descripcion\": \"Revisión completa de frenos y aceite\",\r\n    \"tiempoEstimadoHoras\": 5,\r\n    \"costeTotal\": 1500.50,\r\n    \"finalizado\": false,\r\n    \"fechaEntrada\": \"2025-01-20T08:00:00\",\r\n    \"avion\": {\r\n        \"matricula\": \"EC-1234\"\r\n    },\r\n    \"mecanico\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/mantenimientos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mantenimientos"
 							]
 						}
 					},
@@ -382,39 +394,6 @@
 			"item": [
 				{
 					"name": "mecanicos",
-					"id": "49958330-7507c63f-d399-4aa9-a849-a3addb0f555e",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"licenciaId\": \"LIC-3492\",\r\n  \"nombre\": \"Kenny Pineda\",\r\n  \"nivelExperiencia\": 5,\r\n  \"salarioHora\": 36.50,\r\n  \"disponible\": true,\r\n  \"fechaContratacion\": \"2020-04-20\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/mecanicos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mecanicos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "mecanicos",
 					"id": "49958330-0b857c76-3d25-4eae-8365-ec97eafbef11",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -463,6 +442,64 @@
 									"key": "mecanicoId",
 									"value": "2"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "caros-nuevos",
+					"id": "49958330-52bdeeb2-5a47-4929-b915-e0375fdd98d1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mecanicos/caros-nuevos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mecanicos",
+								"caros-nuevos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mecanicos",
+					"id": "49958330-7507c63f-d399-4aa9-a849-a3addb0f555e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"licenciaId\": \"LIC-4999\",\r\n  \"nombre\": \"Sergio Peinado\",\r\n  \"nivelExperiencia\": 5,\r\n  \"salarioHora\": 36.50,\r\n  \"disponible\": true,\r\n  \"fechaContratacion\": \"2024-04-20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/mecanicos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mecanicos"
 							]
 						}
 					},
