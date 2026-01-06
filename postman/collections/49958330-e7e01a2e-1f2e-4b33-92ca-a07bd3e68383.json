@@ -893,7 +893,20 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/vuelos/incidencias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"vuelos",
+								"incidencias"
+							]
+						}
 					},
 					"response": []
 				}
