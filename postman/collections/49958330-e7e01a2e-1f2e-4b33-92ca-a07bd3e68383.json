@@ -222,6 +222,31 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "top-caros",
+					"id": "49958330-c9112cf3-985e-4e7b-be7b-c8fb3e2ffc2f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mantenimientos/top-caros",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mantenimientos",
+								"top-caros"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"id": "49958330-79f8e53c-61ef-4016-b275-129f17439a44"
