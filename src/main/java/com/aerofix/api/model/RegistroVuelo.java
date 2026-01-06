@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
+@Table(name= "registroVuelo")
 public class RegistroVuelo {
 
     @Id
@@ -14,8 +15,8 @@ public class RegistroVuelo {
     private Long id;
 
     @Column(columnDefinition = "VARCHAR(255)")
-    @NotBlank
-    private String codigoVuelo; // String
+    @NotBlank(message = "El código de vuelo es obligatorio")
+    private String codigoVuelo;
 
     @Column(columnDefinition = "VARCHAR(255)")
     @NotBlank
@@ -23,18 +24,18 @@ public class RegistroVuelo {
 
     @Column
     @Positive
-    private int distanciaKm; // int
+    private Integer distanciaKm; // Wrapper
 
     @Column
     @Positive
-    private float combustibleConsumido; // float
+    private Float combustibleConsumido; // Wrapper
 
     @Column
-    private boolean incidenciasReportadas; // boolean
+    private Boolean incidenciasReportadas; // Wrapper
 
     @Column
     @PastOrPresent
-    private LocalDate fechaVuelo; // fecha
+    private LocalDate fechaVuelo;
 
     @ManyToOne
     @JoinColumn(name = "avion_matricula", nullable = false)
