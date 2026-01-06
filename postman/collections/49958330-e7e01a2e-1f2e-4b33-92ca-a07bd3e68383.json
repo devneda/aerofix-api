@@ -247,6 +247,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "mantenimientos?",
+					"id": "49958330-b6928140-9c41-43ee-8547-d08211b7fb61",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mantenimientos?descripcion=frenos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mantenimientos"
+							],
+							"query": [
+								{
+									"key": "descripcion",
+									"value": "frenos"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"id": "49958330-79f8e53c-61ef-4016-b275-129f17439a44"
