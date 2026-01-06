@@ -325,8 +325,27 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mantenimientos/:mantenimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mantenimientos",
+								":mantenimiento"
+							],
+							"variable": [
+								{
+									"key": "mantenimiento",
+									"value": "ORD-NUEVA-01"
+								}
+							]
+						}
 					},
 					"response": []
 				}
