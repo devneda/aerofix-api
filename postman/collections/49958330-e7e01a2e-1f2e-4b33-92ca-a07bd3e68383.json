@@ -588,7 +588,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"referencia\": \"TORN-X500-B\",\r\n  \"nombre\": \"Tornillo Titanio Aviónica\",\r\n  \"stock\": 499,\r\n  \"precioUnitario\": 12.50,\r\n  \"esCritica\": true,\r\n  \"fechaUltimaRevision\": \"2025-12-01\"\r\n}",
+							"raw": "{\r\n    \"precioUnitario\": 999.99\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -659,7 +659,20 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/piezas/stock-bajo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"piezas",
+								"stock-bajo"
+							]
+						}
 					},
 					"response": []
 				}
