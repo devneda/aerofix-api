@@ -555,7 +555,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"referencia\": \"ARP-FX1500\",\r\n  \"nombre\": \"Corona con forma de arpa para motor GE-TF39\",\r\n  \"stock\": 5,\r\n  \"precioUnitario\": 1989.45,\r\n  \"esCritica\": true,\r\n  \"fechaUltimaRevision\": \"2025-12-17\"\r\n}",
+							"raw": "{\r\n    \"referencia\": \"REF-TEST-01\",\r\n    \"nombre\": \"Filtro de Aceite Avanzado\",\r\n    \"stock\": 50,\r\n    \"precioUnitario\": 120.50,\r\n    \"esCritica\": true,\r\n    \"fechaUltimaRevision\": \"2024-01-01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -627,7 +627,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/piezas?nombre=Filtro&esCritica=false",
+							"raw": "http://localhost:8080/api/piezas?nombre=Filtro&esCritica=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -644,7 +644,7 @@
 								},
 								{
 									"key": "esCritica",
-									"value": "false"
+									"value": "true"
 								}
 							]
 						}
