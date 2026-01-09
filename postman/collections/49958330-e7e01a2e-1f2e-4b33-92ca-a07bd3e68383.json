@@ -1,917 +1,861 @@
 {
-	"info": {
-		"_postman_id": "49958330-e7e01a2e-1f2e-4b33-92ca-a07bd3e68383",
-		"name": "api-aerofix",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "avion",
-			"item": [
-				{
-					"name": "aviones",
-					"id": "49958330-ccbf34a6-6746-42b4-baf1-82ad603fba0a",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/aviones",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"aviones"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ":avionId",
-					"id": "49958330-8e1a03c6-e8f7-44a0-9c70-9d4b4a3d561c",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/aviones/:avionId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"aviones",
-								":avionId"
-							],
-							"variable": [
-								{
-									"key": "avionId",
-									"value": "US-4325"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "avion",
-					"id": "49958330-da2b64db-8d70-4186-a649-f5ed1456966e",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"matricula\": \"US-4325\", \r\n  \"modelo\": \"Airbus A320 Neo\",\r\n  \"capacidadPasajeros\": 240,\r\n  \"horasVuelo\": 200,\r\n  \"enServicio\": true,\r\n  \"fechaFabricacion\": \"2020-05-20\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/aviones",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"aviones"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ":avionId",
-					"id": "2f470c8a-e4ed-4c72-9067-85bc01b94306",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"matricula\": \"US-4325\", \r\n  \"modelo\": \"Airbus A320 Neo\",\r\n  \"capacidadPasajeros\": 240,\r\n  \"horasVuelo\": 200,\r\n  \"enServicio\": true,\r\n  \"fechaFabricacion\": \"2020-05-20\"\r\n}"
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/aviones/:avionId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"aviones",
-								":avionId"
-							],
-							"variable": [
-								{
-									"id": "67e2e248-8f68-4102-a794-709765945715",
-									"key": "avionId",
-									"value": "US-4325"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "grandes",
-					"id": "49958330-fdefe9fb-839f-4e6c-84c9-b19f7fef40d4",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/aviones/grandes",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"aviones",
-								"grandes"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"id": "49958330-6063267a-452c-4fd9-be91-391c2a569728"
-		},
-		{
-			"name": "mantenimiento",
-			"item": [
-				{
-					"name": "mantenimientos",
-					"id": "49958330-c414c354-d9c4-4432-99ef-6762a1814468",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/mantenimientos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mantenimientos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ":mantenimientoId",
-					"id": "49958330-f4700f36-9a64-4f13-bcd3-20f82b02ff44",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/mantenimientos/:mantenimientoId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mantenimientos",
-								":mantenimientoId"
-							],
-							"variable": [
-								{
-									"key": "mantenimientoId",
-									"value": "ORD-NUEVA-01"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "gasto-total",
-					"id": "49958330-4c91bc40-45a4-4fc2-883f-2d20e17cc689",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/mantenimientos/gasto-total",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mantenimientos",
-								"gasto-total"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "top-caros",
-					"id": "49958330-c9112cf3-985e-4e7b-be7b-c8fb3e2ffc2f",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/mantenimientos/top-caros",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mantenimientos",
-								"top-caros"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "mantenimientos?",
-					"id": "49958330-b6928140-9c41-43ee-8547-d08211b7fb61",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/mantenimientos?descripcion=frenos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mantenimientos"
-							],
-							"query": [
-								{
-									"key": "descripcion",
-									"value": "frenos"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "mantenimientos",
-					"id": "49958330-5678e4de-03b1-4549-9b06-c8cd9e6abfc9",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"codigoOrden\": \"ORD-NUEVA-01\",\r\n    \"descripcion\": \"Revisión completa de frenos y aceite\",\r\n    \"tiempoEstimadoHoras\": 5,\r\n    \"costeTotal\": 1500.50,\r\n    \"finalizado\": false,\r\n    \"fechaEntrada\": \"2025-01-20T08:00:00\",\r\n    \"avion\": {\r\n        \"matricula\": \"EC-1234\"\r\n    },\r\n    \"mecanico\": {\r\n        \"id\": 1\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/mantenimientos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mantenimientos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ":mantenimiento",
-					"id": "49958330-3d651fb2-449b-43ad-8b24-34c81d96159b",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"descripcion\": \"Revisión completa de frenos FINALIZADA\",\r\n    \"costeTotal\": 2000.00,\r\n    \"finalizado\": true\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/mantenimientos/:mantenimiento",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mantenimientos",
-								":mantenimiento"
-							],
-							"variable": [
-								{
-									"key": "mantenimiento",
-									"value": "ORD-NUEVA-01"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ":mantenimiento",
-					"id": "49958330-77602531-2646-49a8-af18-5aa5bf808d63",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/mantenimientos/:mantenimiento",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mantenimientos",
-								":mantenimiento"
-							],
-							"variable": [
-								{
-									"key": "mantenimiento",
-									"value": "ORD-NUEVA-01"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"id": "49958330-79f8e53c-61ef-4016-b275-129f17439a44"
-		},
-		{
-			"name": "mecanico",
-			"item": [
-				{
-					"name": "mecanicos",
-					"id": "49958330-0b857c76-3d25-4eae-8365-ec97eafbef11",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/mecanicos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mecanicos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ":mecanicoId",
-					"id": "49958330-c2e35b5b-ca6e-4b0a-8c16-fdb168761532",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/mecanicos/:mecanicoId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mecanicos",
-								":mecanicoId"
-							],
-							"variable": [
-								{
-									"key": "mecanicoId",
-									"value": "2"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "caros-nuevos",
-					"id": "49958330-52bdeeb2-5a47-4929-b915-e0375fdd98d1",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/mecanicos/caros-nuevos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mecanicos",
-								"caros-nuevos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "mecanicos",
-					"id": "49958330-7507c63f-d399-4aa9-a849-a3addb0f555e",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"licenciaId\": \"LIC-4999\",\r\n  \"nombre\": \"Sergio Peinado\",\r\n  \"nivelExperiencia\": 5,\r\n  \"salarioHora\": 36.50,\r\n  \"disponible\": true,\r\n  \"fechaContratacion\": \"2024-04-20\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/mecanicos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mecanicos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "mecanico",
-					"id": "49958330-0ba46aac-7428-4400-ba55-1c8d5c8d347b",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"licenciaId\": \"LIC-3492\",\r\n  \"nombre\": \"Kenny Pineda\",\r\n  \"nivelExperiencia\": 5,\r\n  \"salarioHora\": 40.00,\r\n  \"disponible\": true,\r\n  \"fechaContratacion\": \"2020-04-20\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/mecanicos/:mecanicoId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mecanicos",
-								":mecanicoId"
-							],
-							"variable": [
-								{
-									"key": "mecanicoId",
-									"value": "2"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"id": "49958330-57cf6080-6cde-4b84-8c88-cb5165002d4c"
-		},
-		{
-			"name": "pieza",
-			"item": [
-				{
-					"name": "pieza",
-					"id": "49958330-b12eaaf0-d69f-47d8-b69e-5952b16cdbc0",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/piezas",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"piezas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ":piezaReferencia",
-					"id": "49958330-5b2c5e02-95e4-40be-9426-0c6af18269f0",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/piezas/:piezaReferencia",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"piezas",
-								":piezaReferencia"
-							],
-							"variable": [
-								{
-									"key": "piezaReferencia",
-									"value": "ARP-FX1500"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "pieza",
-					"id": "49958330-d5499ded-0ad0-4dff-8eda-5f1cfa255ce0",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"referencia\": \"REF-TEST-01\",\r\n    \"nombre\": \"Filtro de Aceite Avanzado\",\r\n    \"stock\": 50,\r\n    \"precioUnitario\": 120.50,\r\n    \"esCritica\": true,\r\n    \"fechaUltimaRevision\": \"2024-01-01\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/piezas",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"piezas"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ":piezaId",
-					"id": "49958330-d633d37e-e21d-4c12-8856-e1faff4a9474",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"precioUnitario\": 1000.00,\r\n    \"esCritica\": false\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/piezas/:piezaId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"piezas",
-								":piezaId"
-							],
-							"variable": [
-								{
-									"key": "piezaId",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "pieza?nombre",
-					"id": "49958330-1bd4ebfa-b709-43a4-985d-bb1aa5422659",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/piezas?nombre=Filtro&esCritica=true",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"piezas"
-							],
-							"query": [
-								{
-									"key": "nombre",
-									"value": "Filtro"
-								},
-								{
-									"key": "esCritica",
-									"value": "true"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "stock-bajo",
-					"id": "49958330-9274638e-1096-46e1-86f7-1e60d8a9eb20",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/piezas/stock-bajo",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"piezas",
-								"stock-bajo"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"id": "49958330-b0e7ffa2-80e1-4516-92bc-d359c67591bf"
-		},
-		{
-			"name": "registroVuelo",
-			"item": [
-				{
-					"name": "registroVuelos",
-					"id": "49958330-45c249c3-ec93-4075-bfbb-86c2231f49a9",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/vuelos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"vuelos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ":registroId",
-					"id": "49958330-9bfdc09d-a8a5-43df-bcca-7a621335e949",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/vuelos/:registroId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"vuelos",
-								":registroId"
-							],
-							"variable": [
-								{
-									"key": "registroId",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "registroVuelo",
-					"id": "49958330-74a978cd-5a23-42d2-80b3-bb1234fa066f",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"codigoVuelo\": \"IB-9999\",\r\n    \"origenDestino\": \"Madrid (MAD) - New York (JFK)\",\r\n    \"fechaSalida\": \"2025-06-20T14:00:00\",\r\n    \"fechaLlegada\": \"2025-06-20T22:00:00\",\r\n    \"distanciaKm\": 6000,\r\n    \"avion\": {\r\n        \"matricula\": \"EC-1234\" \r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/vuelos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"vuelos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ":registroId",
-					"id": "49958330-41dd9e6f-3d1f-4fe7-ba17-c71e22faa076",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"codigoVuelo\": \"IB-3400\",\r\n  \"origenDestino\": \"MAD-CDG\",\r\n  \"distanciaKm\": 1200,\r\n  \"combustibleConsumido\": 5000.5,\r\n  \"incidenciasReportadas\": true,\r\n  \"fechaVuelo\": \"2025-10-20\",\r\n  \"avion\": {\r\n    \"matricula\": \"ES-1024\" \r\n  }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/vuelos/:registroId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"vuelos",
-								":registroId"
-							],
-							"variable": [
-								{
-									"key": "registroId",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "incidencias",
-					"id": "49958330-59e0c493-a134-4d4c-9a54-b67e7b0b8cd5",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/vuelos/incidencias",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"vuelos",
-								"incidencias"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"id": "49958330-349c0824-ac53-41a1-85c3-bfbb137c09e6"
-		}
-	]
+  "info": {
+    "_postman_id": "49958330-e7e01a2e-1f2e-4b33-92ca-a07bd3e68383",
+    "name": "api-aerofix",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "avion",
+      "item": [
+        {
+          "name": "avion",
+          "id": "49958330-da2b64db-8d70-4186-a649-f5ed1456966e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"matricula\": \"US-4325\", \r\n  \"modelo\": \"Airbus A320 Neo\",\r\n  \"capacidadPasajeros\": 240,\r\n  \"horasVuelo\": 200,\r\n  \"enServicio\": true,\r\n  \"fechaFabricacion\": \"2020-05-20\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/aviones",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "aviones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":avionId",
+          "id": "2f470c8a-e4ed-4c72-9067-85bc01b94306",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"matricula\": \"US-4325\", \r\n  \"modelo\": \"Airbus A320 Neo\",\r\n  \"capacidadPasajeros\": 240,\r\n  \"horasVuelo\": 200,\r\n  \"enServicio\": true,\r\n  \"fechaFabricacion\": \"2020-05-20\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/aviones/:avionId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "aviones",
+                ":avionId"
+              ],
+              "variable": [
+                {
+                  "key": "avionId",
+                  "value": "US-4325"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "grandes",
+          "id": "49958330-fdefe9fb-839f-4e6c-84c9-b19f7fef40d4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/aviones/grandes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "aviones",
+                "grandes"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "49958330-6063267a-452c-4fd9-be91-391c2a569728"
+    },
+    {
+      "name": "mantenimiento",
+      "item": [
+        {
+          "name": "mantenimientos",
+          "id": "49958330-c414c354-d9c4-4432-99ef-6762a1814468",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":mantenimientoId",
+          "id": "49958330-f4700f36-9a64-4f13-bcd3-20f82b02ff44",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos/:mantenimientoId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos",
+                ":mantenimientoId"
+              ],
+              "variable": [
+                {
+                  "key": "mantenimientoId",
+                  "value": "ORD-NUEVA-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "gasto-total",
+          "id": "49958330-4c91bc40-45a4-4fc2-883f-2d20e17cc689",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos/gasto-total",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos",
+                "gasto-total"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "top-caros",
+          "id": "49958330-c9112cf3-985e-4e7b-be7b-c8fb3e2ffc2f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos/top-caros",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos",
+                "top-caros"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "mantenimientos?",
+          "id": "49958330-b6928140-9c41-43ee-8547-d08211b7fb61",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos?descripcion=frenos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos"
+              ],
+              "query": [
+                {
+                  "key": "descripcion",
+                  "value": "frenos"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "mantenimientos",
+          "id": "49958330-5678e4de-03b1-4549-9b06-c8cd9e6abfc9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"codigoOrden\": \"ORD-NUEVA-01\",\r\n    \"descripcion\": \"Revisión completa de frenos y aceite\",\r\n    \"tiempoEstimadoHoras\": 5,\r\n    \"costeTotal\": 1500.50,\r\n    \"finalizado\": false,\r\n    \"fechaEntrada\": \"2025-01-20T08:00:00\",\r\n    \"avion\": {\r\n        \"matricula\": \"EC-1234\"\r\n    },\r\n    \"mecanico\": {\r\n        \"id\": 1\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":mantenimiento",
+          "id": "49958330-3d651fb2-449b-43ad-8b24-34c81d96159b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"descripcion\": \"Revisión completa de frenos FINALIZADA\",\r\n    \"costeTotal\": 2000.00,\r\n    \"finalizado\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos/:mantenimiento",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos",
+                ":mantenimiento"
+              ],
+              "variable": [
+                {
+                  "key": "mantenimiento",
+                  "value": "ORD-NUEVA-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":mantenimiento",
+          "id": "49958330-77602531-2646-49a8-af18-5aa5bf808d63",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos/:mantenimiento",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos",
+                ":mantenimiento"
+              ],
+              "variable": [
+                {
+                  "key": "mantenimiento",
+                  "value": "ORD-NUEVA-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "49958330-79f8e53c-61ef-4016-b275-129f17439a44"
+    },
+    {
+      "name": "mecanico",
+      "item": [
+        {
+          "name": "mecanicos",
+          "id": "49958330-0b857c76-3d25-4eae-8365-ec97eafbef11",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mecanicos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mecanicos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":mecanicoId",
+          "id": "49958330-c2e35b5b-ca6e-4b0a-8c16-fdb168761532",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mecanicos/:mecanicoId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mecanicos",
+                ":mecanicoId"
+              ],
+              "variable": [
+                {
+                  "key": "mecanicoId",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "caros-nuevos",
+          "id": "49958330-52bdeeb2-5a47-4929-b915-e0375fdd98d1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mecanicos/caros-nuevos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mecanicos",
+                "caros-nuevos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "mecanicos",
+          "id": "49958330-7507c63f-d399-4aa9-a849-a3addb0f555e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"licenciaId\": \"LIC-4999\",\r\n  \"nombre\": \"Sergio Peinado\",\r\n  \"nivelExperiencia\": 5,\r\n  \"salarioHora\": 36.50,\r\n  \"disponible\": true,\r\n  \"fechaContratacion\": \"2024-04-20\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/mecanicos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mecanicos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "mecanico",
+          "id": "49958330-0ba46aac-7428-4400-ba55-1c8d5c8d347b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"licenciaId\": \"LIC-3492\",\r\n  \"nombre\": \"Kenny Pineda\",\r\n  \"nivelExperiencia\": 5,\r\n  \"salarioHora\": 40.00,\r\n  \"disponible\": true,\r\n  \"fechaContratacion\": \"2020-04-20\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/mecanicos/:mecanicoId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mecanicos",
+                ":mecanicoId"
+              ],
+              "variable": [
+                {
+                  "key": "mecanicoId",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "49958330-57cf6080-6cde-4b84-8c88-cb5165002d4c"
+    },
+    {
+      "name": "pieza",
+      "item": [
+        {
+          "name": "pieza",
+          "id": "49958330-b12eaaf0-d69f-47d8-b69e-5952b16cdbc0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/piezas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "piezas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":piezaReferencia",
+          "id": "49958330-5b2c5e02-95e4-40be-9426-0c6af18269f0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/piezas/:piezaReferencia",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "piezas",
+                ":piezaReferencia"
+              ],
+              "variable": [
+                {
+                  "key": "piezaReferencia",
+                  "value": "ARP-FX1500"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "pieza",
+          "id": "49958330-d5499ded-0ad0-4dff-8eda-5f1cfa255ce0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"referencia\": \"REF-TEST-01\",\r\n    \"nombre\": \"Filtro de Aceite Avanzado\",\r\n    \"stock\": 50,\r\n    \"precioUnitario\": 120.50,\r\n    \"esCritica\": true,\r\n    \"fechaUltimaRevision\": \"2024-01-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/piezas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "piezas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":piezaId",
+          "id": "49958330-d633d37e-e21d-4c12-8856-e1faff4a9474",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"precioUnitario\": 1000.00,\r\n    \"esCritica\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/piezas/:piezaId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "piezas",
+                ":piezaId"
+              ],
+              "variable": [
+                {
+                  "key": "piezaId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "pieza?nombre",
+          "id": "49958330-1bd4ebfa-b709-43a4-985d-bb1aa5422659",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/piezas?nombre=Filtro&esCritica=true",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "piezas"
+              ],
+              "query": [
+                {
+                  "key": "nombre",
+                  "value": "Filtro"
+                },
+                {
+                  "key": "esCritica",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "stock-bajo",
+          "id": "49958330-9274638e-1096-46e1-86f7-1e60d8a9eb20",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/piezas/stock-bajo",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "piezas",
+                "stock-bajo"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "49958330-b0e7ffa2-80e1-4516-92bc-d359c67591bf"
+    },
+    {
+      "name": "registroVuelo",
+      "item": [
+        {
+          "name": "registroVuelos",
+          "id": "49958330-45c249c3-ec93-4075-bfbb-86c2231f49a9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/vuelos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "vuelos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":registroId",
+          "id": "49958330-9bfdc09d-a8a5-43df-bcca-7a621335e949",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/vuelos/:registroId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "vuelos",
+                ":registroId"
+              ],
+              "variable": [
+                {
+                  "key": "registroId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "registroVuelo",
+          "id": "49958330-74a978cd-5a23-42d2-80b3-bb1234fa066f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"codigoVuelo\": \"IB-9999\",\r\n    \"origenDestino\": \"Madrid (MAD) - New York (JFK)\",\r\n    \"fechaSalida\": \"2025-06-20T14:00:00\",\r\n    \"fechaLlegada\": \"2025-06-20T22:00:00\",\r\n    \"distanciaKm\": 6000,\r\n    \"avion\": {\r\n        \"matricula\": \"EC-1234\" \r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/vuelos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "vuelos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":registroId",
+          "id": "49958330-41dd9e6f-3d1f-4fe7-ba17-c71e22faa076",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"codigoVuelo\": \"IB-3400\",\r\n  \"origenDestino\": \"MAD-CDG\",\r\n  \"distanciaKm\": 1200,\r\n  \"combustibleConsumido\": 5000.5,\r\n  \"incidenciasReportadas\": true,\r\n  \"fechaVuelo\": \"2025-10-20\",\r\n  \"avion\": {\r\n    \"matricula\": \"ES-1024\" \r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/vuelos/:registroId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "vuelos",
+                ":registroId"
+              ],
+              "variable": [
+                {
+                  "key": "registroId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "incidencias",
+          "id": "49958330-59e0c493-a134-4d4c-9a54-b67e7b0b8cd5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/vuelos/incidencias",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "vuelos",
+                "incidencias"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "49958330-349c0824-ac53-41a1-85c3-bfbb137c09e6"
+    }
+  ]
 }
