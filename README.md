@@ -36,7 +36,7 @@ Para ejecutar este proyecto necesitas:
 
 ### 1. Clonar el repositorio
 ```bash
-git clone [https://github.com/tu-usuario/aerofix-api.git](https://github.com/tu-usuario/aerofix-api.git)
+git clone [https://github.com/devneda/aerofix-api.git](https://github.com/devneda/aerofix-api.git)
 cd aerofix-api
 ```
 
