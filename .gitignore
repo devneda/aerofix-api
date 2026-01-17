@@ -1,12 +1,40 @@
+### --- Sistema Operativo (¡IMPORTANTE!) ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+### --- Logs de Aplicación ---
+*.log
+logs/
+log/
+!**/src/main/resources/log4j2.xml
+!**/src/main/resources/logback-spring.xml
+
+### --- Maven y Java ---
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+*.class
+# Archivo generado a veces por plugins de Maven
+dependency-reduced-pom.xml
+
+### --- Spring Boot / Secretos ---
 HELP.md
 .env
 .env.local
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# Ignorar configuraciones locales personales (opcional pero recomendado)
+application-local.properties
+application-secret.properties
 
-### STS ###
+### --- IDEs ---
+
+### STS / Eclipse ###
 .apt_generated
 .classpath
 .factorypath
@@ -14,12 +42,16 @@ target/
 .settings
 .springBeans
 .sts4-cache
+bin/
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
 ### NetBeans ###
 /nbproject/private/
@@ -33,3 +65,4 @@ build/
 
 ### VS Code ###
 .vscode/
+*.code-workspace
