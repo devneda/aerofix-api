@@ -13,14 +13,13 @@ Este proyecto implementa una API Web para gestionar aviones, mecánicos, piezas,
 
 ## 🚀 Tecnologías Utilizadas
 * **Java 21**
-* **Spring Boot 3.x**
+* **Spring Boot 3.5.8**
 * **PostgreSQL** (Persistencia de datos)
 * **Spring Data JPA / Hibernate** (ORM)
 * **OpenAPI 3.0 (Swagger)** (Documentación interactiva)
 * **Mockito** (Tests Unitarios y de Integración)
 * **WireMock** (Simulación de API externa)
 * **ModelMapper** (Transformación Entidad-DTO)
-* **Lombok** (Reducción de código boilerplate)
 
 ## ⚙️ Requisitos Previos
 Para ejecutar este proyecto necesitas:
@@ -36,7 +35,7 @@ Para ejecutar este proyecto necesitas:
 
 ### 1. Clonar el repositorio
 ```bash
-git clone [https://github.com/devneda/aerofix-api.git](https://github.com/devneda/aerofix-api.git)
+git clone https://github.com/devneda/aerofix-api.git
 cd aerofix-api
 ```
 
@@ -55,6 +54,9 @@ Una vez iniciada la aplicación, la documentación interactiva OpenAPI 3.0 está
 
 Desde aquí puedes probar todos los endpoints (GET, POST, PUT, DELETE, PATCH).
 
+También tienes disponible el fichero `aerofix.yaml` en la raíz del proyecto para que la pruebes
+con una herrmienta de APIs externa. 
+
 ## ✅ Testing
 
 El proyecto cuenta con una amplia cobertura de tests que aseguran la calidad del código:
@@ -67,3 +69,30 @@ Para ejecutar todos los tests:
 ```bash
 ./mvnw test
 ```
+
+## 🚀 Probando la API con Postman
+
+A continuación se muestra el flujo de trabajo básico para gestionar aviones en la aplicación:
+
+### 1. Listar Aviones (GET)
+Obtenemos el listado general para ver los aviones disponibles inicialmente.
+![Listado de Aviones](./docs/img/get-aviones.png)
+
+---
+
+### 2. Registrar un Nuevo Avión (POST)
+Creamos un nuevo avión enviando el JSON con los datos necesarios. La API devuelve el objeto creado con su ID asignado (campo `matricula`).
+![Crear Avión](./docs/img/post-avion.png)
+
+---
+
+### 3. Consultar el Avión Creado (GET por ID)
+Usamos el ID generado en el paso anterior para verificar que el avión se ha guardado correctamente en la base de datos.
+![Detalle de Avión](./docs/img/get-avionId.png)
+
+---
+
+### 4. Búsqueda con Filtros (GET)
+Ejemplo de petición utilizando **Query Params** para filtrar los resultados. En este caso, solicitamos únicamente los aviones que se encuentran actualmente **en servicio**.
+
+![Filtro de Aviones en Servicio](./docs/img/get-aviones-filtro.png)
