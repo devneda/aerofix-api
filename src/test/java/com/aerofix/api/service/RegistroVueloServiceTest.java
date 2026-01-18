@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class) // Usamos Mockito puro, sin contexto de Spring (más rápido)
+@ExtendWith(MockitoExtension.class)
 class RegistroVueloServiceTest {
 
     @Mock
@@ -36,7 +36,7 @@ class RegistroVueloServiceTest {
 
     @Test
     void testGuardar_Exito() {
-        // 1. PREPARAR DATOS (GIVEN)
+
         RegistroVuelo vueloEntrada = new RegistroVuelo();
         Avion avionMock = new Avion();
         avionMock.setMatricula("EC-123");
@@ -45,32 +45,27 @@ class RegistroVueloServiceTest {
         RegistroVueloDTO dtoEsperado = new RegistroVueloDTO();
         dtoEsperado.setCodigoVuelo("IB-001");
 
-        // 2. SIMULAR COMPORTAMIENTO (WHEN)
         when(avionRepository.findById("EC-123")).thenReturn(Optional.of(avionMock));
         when(registroVueloRepository.save(any(RegistroVuelo.class))).thenReturn(vueloEntrada);
         when(modelMapper.map(any(), eq(RegistroVueloDTO.class))).thenReturn(dtoEsperado);
 
-        // 3. EJECUTAR (ACT)
         RegistroVueloDTO resultado = registroVueloService.guardar(vueloEntrada);
 
-        // 4. VERIFICAR (THEN)
         assertNotNull(resultado);
         assertEquals("IB-001", resultado.getCodigoVuelo());
-        verify(avionRepository).findById("EC-123"); // Verificamos que llamó al repo de aviones
+        verify(avionRepository).findById("EC-123");
     }
 
     @Test
     void testGuardar_AvionNoExiste_LanzaExcepcion() {
-        // GIVEN
+
         RegistroVuelo vueloEntrada = new RegistroVuelo();
         Avion avionMock = new Avion();
         avionMock.setMatricula("EC-FANTASMA");
         vueloEntrada.setAvion(avionMock);
 
-        // WHEN (El repo devuelve vacío)
         when(avionRepository.findById("EC-FANTASMA")).thenReturn(Optional.empty());
 
-        // THEN
         assertThrows(VueloNotFoundException.class, () -> {
             registroVueloService.guardar(vueloEntrada);
         });

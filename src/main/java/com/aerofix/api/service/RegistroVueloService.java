@@ -2,14 +2,14 @@ package com.aerofix.api.service;
 
 import com.aerofix.api.dto.RegistroVueloDTO;
 import com.aerofix.api.exception.VueloNotFoundException;
-import com.aerofix.api.model.Avion; // Importante
+import com.aerofix.api.model.Avion;
 import com.aerofix.api.model.RegistroVuelo;
-import com.aerofix.api.repository.AvionRepository; // Importante
+import com.aerofix.api.repository.AvionRepository;
 import com.aerofix.api.repository.RegistroVueloRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional; // Recomendado
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class RegistroVueloService {
     private RegistroVueloRepository registroVueloRepository;
 
     @Autowired
-    private AvionRepository avionRepository; // <--- 1. INYECTAR ESTO
+    private AvionRepository avionRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -37,15 +37,13 @@ public class RegistroVueloService {
         return toDTO(vuelo);
     }
 
-    @Transactional // <--- Buena práctica para asegurar la operación
+    @Transactional
     public RegistroVueloDTO guardar(RegistroVuelo vuelo) {
-        // 2. LÓGICA PARA ASOCIAR EL AVIÓN REAL
-
-        // Verificamos que venga información del avión
+        // Primero compruebo si el avión existe
         if (vuelo.getAvion() == null || vuelo.getAvion().getMatricula() == null) {
             throw new IllegalArgumentException("Es necesario especificar la matrícula del avión.");
         }
-
+        // Obtenemos su matricula
         String matricula = vuelo.getAvion().getMatricula();
 
         // Buscamos el avión real en la BBDD usando la matrícula
@@ -56,6 +54,7 @@ public class RegistroVueloService {
         vuelo.setAvion(avionReal);
 
         // Ahora sí, guardamos. Hibernate ya está feliz porque el avión es una entidad gestionada.
+        // Antes daba problemas porque se le enviaba un objeto Avión incompleto.
         return toDTO(registroVueloRepository.save(vuelo));
     }
 
@@ -65,7 +64,6 @@ public class RegistroVueloService {
         RegistroVuelo existente = registroVueloRepository.findById(id)
                 .orElseThrow(VueloNotFoundException::new);
 
-        // Copia inteligente (ignora nulos)
         modelMapper.map(nuevosDatos, existente);
 
         // Si en la actualización intentan cambiar el avión, también hay que buscarlo

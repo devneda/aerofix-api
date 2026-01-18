@@ -19,17 +19,17 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(RegistroVueloController.class) // Solo carga este controlador
+@WebMvcTest(RegistroVueloController.class)
 class RegistroVueloControllerTest {
 
     @Autowired
-    private MockMvc mockMvc; // Simula peticiones HTTP
+    private MockMvc mockMvc;
 
     @MockitoBean
-    private RegistroVueloService registroVueloService; // Simulamos el servicio
+    private RegistroVueloService registroVueloService;
 
     @Autowired
-    private ObjectMapper objectMapper; // Para convertir objetos a JSON
+    private ObjectMapper objectMapper;
 
     // CASO 1: Éxito (200 OK)
     @Test
@@ -61,7 +61,7 @@ class RegistroVueloControllerTest {
         mockMvc.perform(post("/api/vuelos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(vueloInvalido)))
-                .andExpect(status().isBadRequest()); // Verifica que sea 400
+                .andExpect(status().isBadRequest());
     }
 
     // CASO 4: Éxito Crear (201 Created)
@@ -73,9 +73,6 @@ class RegistroVueloControllerTest {
         // Simular respuesta del servicio
         when(registroVueloService.guardar(any(RegistroVuelo.class))).thenReturn(dtoSimulado);
 
-        // Objeto válido para enviar
-        // Nota: En un test real, necesitarías construir un objeto que pase las validaciones @NotBlank, etc.
-        // Aquí usamos una cadena JSON manual simple para ilustrar
         String jsonValido = """
             {
                 "codigoVuelo": "IB-TEST",

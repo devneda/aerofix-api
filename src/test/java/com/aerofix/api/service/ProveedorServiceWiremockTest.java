@@ -15,36 +15,31 @@ class ProveedorServiceWiremockTest {
 
     @BeforeEach
     void setUp() {
-        // 1. Arrancamos Wiremock en un puerto dinámico (o fijo, ej: 8089)
+
         wireMockServer = new WireMockServer(8089);
         wireMockServer.start();
 
-        // Configuración básica
         WireMock.configureFor("localhost", 8089);
 
-        // 2. Inicializamos nuestro servicio real
         proveedorService = new ProveedorService();
-        // Le decimos al servicio que apunte a nuestro servidor falso
         proveedorService.setBaseUrl("http://localhost:8089");
     }
 
     @AfterEach
     void tearDown() {
-        // Apagamos el servidor después de cada test
         wireMockServer.stop();
     }
 
     @Test
     void consultarStock_DeberiaDevolverTrue_CuandoWiremockRespondeTrue() {
-        // GIVEN: "Entrenamos" a Wiremock
-        // Le decimos: "Si alguien llama a GET /api/stock/TURB-99, respóndele 'true' con estado 200"
+
         stubFor(get(urlEqualTo("/api/stock/TURB-99"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "text/plain")
                         .withStatus(200)
                         .withBody("true")));
 
-        // WHEN: Ejecutamos nuestro servicio real
+        // WHEN: Ejecutamos el servicio real
         boolean hayStock = proveedorService.consultarStockExterno("TURB-99");
 
         // THEN: Verificamos
@@ -56,7 +51,7 @@ class ProveedorServiceWiremockTest {
 
     @Test
     void consultarStock_DeberiaDevolverFalse_CuandoWiremockDevuelve404() {
-        // GIVEN: Simulamos que la pieza no existe en el proveedor
+
         stubFor(get(urlEqualTo("/api/stock/INEXISTENTE"))
                 .willReturn(aResponse()
                         .withStatus(404)));
