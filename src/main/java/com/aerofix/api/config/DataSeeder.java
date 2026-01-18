@@ -18,7 +18,6 @@ public class DataSeeder implements CommandLineRunner {
     private final PiezaRepository piezaRepository;
     private final MecanicoRepository mecanicoRepository;
     private final MantenimientoRepository mantenimientoRepository;
-    // Agrega aquí RegistroVueloRepository si ya lo tienes listo
 
     public DataSeeder(AvionRepository avionRepository,
                       PiezaRepository piezaRepository,
@@ -43,7 +42,7 @@ public class DataSeeder implements CommandLineRunner {
 
         // 1. CREAR AVIONES
         Avion avion1 = new Avion();
-        avion1.setMatricula("EC-1234"); // <--- CORREGIDO (Antes EC-Md1)
+        avion1.setMatricula("EC-1234");
         avion1.setModelo("Boeing 737");
         avion1.setCapacidadPasajeros(180);
         avion1.setHorasVuelo(1200.5f);
@@ -51,7 +50,7 @@ public class DataSeeder implements CommandLineRunner {
         avion1.setFechaFabricacion(LocalDate.of(2015, 5, 20));
 
         Avion avion2 = new Avion();
-        avion2.setMatricula("EC-5678"); // <--- CORREGIDO (Antes EC-LPO)
+        avion2.setMatricula("EC-5678");
         avion2.setModelo("Airbus A320");
         avion2.setCapacidadPasajeros(150);
         avion2.setHorasVuelo(5000.0f);
@@ -108,9 +107,9 @@ public class DataSeeder implements CommandLineRunner {
         mant1.setFechaEntrada(LocalDateTime.now().minusDays(2));
 
         // Relaciones
-        mant1.setAvion(avion2); // El avión que pusimos fuera de servicio
+        mant1.setAvion(avion2);
         mant1.setMecanico(mec1);
-        mant1.setPiezasEmpleadas(List.of(p1, p2)); // Usa ambas piezas
+        mant1.setPiezasEmpleadas(List.of(p1, p2));
 
         mantenimientoRepository.save(mant1);
 

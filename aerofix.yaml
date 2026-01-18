@@ -1,0 +1,1046 @@
+openapi: 3.0.1
+info:
+  title: AeroFix API
+  description: API para la gestión de mantenimiento de aviones (Aerofix).
+  contact:
+    name: Kenny Pineda Bayas
+    email: a28725@svalero.com
+  version: 1.0.0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+tags:
+- name: Vuelos
+  description: Operaciones de gestión de registros de vuelo
+paths:
+  /api/vuelos/{id}:
+    get:
+      tags:
+      - Vuelos
+      summary: Obtener vuelo por ID
+      description: Devuelve los detalles de un vuelo específico.
+      operationId: obtenerPorId
+      parameters:
+      - name: id
+        in: path
+        description: ID numérico del vuelo
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Vuelo no encontrado
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "200":
+          description: Vuelo encontrado
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/RegistroVueloDTO"
+    put:
+      tags:
+      - Vuelos
+      summary: Actualizar vuelo
+      description: Modifica los datos de un vuelo existente.
+      operationId: actualizar
+      parameters:
+      - name: id
+        in: path
+        description: ID del vuelo a actualizar
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegistroVuelo"
+        required: true
+      responses:
+        "400":
+          description: Datos de actualización inválidos
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Vuelo o Avión (si se intenta cambiar) no encontrado
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "200":
+          description: Vuelo actualizado correctamente
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/RegistroVueloDTO"
+    delete:
+      tags:
+      - Vuelos
+      summary: Eliminar vuelo
+      description: Borra un registro de vuelo del sistema.
+      operationId: eliminar
+      parameters:
+      - name: id
+        in: path
+        description: ID del vuelo a eliminar
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: El vuelo no existe
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "204":
+          description: Vuelo eliminado correctamente
+  /api/piezas/{id}:
+    get:
+      tags:
+      - pieza-controller
+      operationId: obtenerPorId_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PiezaDTO"
+    put:
+      tags:
+      - pieza-controller
+      operationId: actualizar_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pieza"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PiezaDTO"
+    delete:
+      tags:
+      - pieza-controller
+      operationId: eliminar_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+  /api/mecanicos/{id}:
+    get:
+      tags:
+      - mecanico-controller
+      operationId: obtenerPorId_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MecanicoDTO"
+    put:
+      tags:
+      - mecanico-controller
+      operationId: modificar
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mecanico"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MecanicoDTO"
+    delete:
+      tags:
+      - mecanico-controller
+      operationId: eliminarMecanico
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+  /api/mantenimientos/{codigoOrden}:
+    get:
+      tags:
+      - mantenimiento-controller
+      operationId: obtenerPorId_3
+      parameters:
+      - name: codigoOrden
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MantenimientoDTO"
+    put:
+      tags:
+      - mantenimiento-controller
+      operationId: modificar_1
+      parameters:
+      - name: codigoOrden
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mantenimiento"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MantenimientoDTO"
+    delete:
+      tags:
+      - mantenimiento-controller
+      operationId: eliminar_2
+      parameters:
+      - name: codigoOrden
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/aviones/{matricula}:
+    get:
+      tags:
+      - avion-controller
+      operationId: obtenerPorId_4
+      parameters:
+      - name: matricula
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AvionDTO"
+    put:
+      tags:
+      - avion-controller
+      operationId: modificarAvion
+      parameters:
+      - name: matricula
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Avion"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AvionDTO"
+    delete:
+      tags:
+      - avion-controller
+      operationId: eliminarAvion
+      parameters:
+      - name: matricula
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/vuelos:
+    get:
+      tags:
+      - Vuelos
+      summary: Obtener lista de vuelos
+      description: "Devuelve todos los vuelos registrados. Permite filtrar por destino,\
+        \ incidencias o código parcial."
+      operationId: obtenerTodos
+      parameters:
+      - name: destino
+        in: query
+        description: Filtra vuelos por ciudad de origen o destino
+        required: false
+        schema:
+          type: string
+      - name: incidencias
+        in: query
+        description: Filtra vuelos según si han reportado incidencias (true/false)
+        required: false
+        schema:
+          type: boolean
+      - name: codigo
+        in: query
+        description: Filtra por coincidencia parcial en el código de vuelo
+        required: false
+        schema:
+          type: string
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "200":
+          description: Lista de vuelos recuperada con éxito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegistroVueloDTO"
+        "500":
+          description: Error interno del servidor
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      tags:
+      - Vuelos
+      summary: Registrar nuevo vuelo
+      description: Crea un nuevo registro de vuelo y lo asocia a un avión existente
+        mediante su matrícula.
+      operationId: guardar
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegistroVuelo"
+        required: true
+      responses:
+        "400":
+          description: "Datos inválidos (fechas erróneas, matrícula vacía...)"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: El avión indicado por la matrícula no existe
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "201":
+          description: Vuelo registrado exitosamente
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/RegistroVueloDTO"
+  /api/piezas:
+    get:
+      tags:
+      - pieza-controller
+      operationId: obtenerPiezas
+      parameters:
+      - name: nombre
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: esCritica
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: precioMax
+        in: query
+        required: false
+        schema:
+          type: number
+          format: float
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PiezaDTO"
+    post:
+      tags:
+      - pieza-controller
+      operationId: guardar_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pieza"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PiezaDTO"
+  /api/mecanicos:
+    get:
+      tags:
+      - mecanico-controller
+      operationId: obtenerMecanicos
+      parameters:
+      - name: disponible
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: experienciaMin
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: nombre
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MecanicoDTO"
+    post:
+      tags:
+      - mecanico-controller
+      operationId: guardarMecanico
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mecanico"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MecanicoDTO"
+  /api/mantenimientos:
+    get:
+      tags:
+      - mantenimiento-controller
+      operationId: obtenerMantenimientos
+      parameters:
+      - name: finalizado
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: costeMax
+        in: query
+        required: false
+        schema:
+          type: number
+          format: float
+      - name: descripcion
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MantenimientoDTO"
+    post:
+      tags:
+      - mantenimiento-controller
+      operationId: guardar_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mantenimiento"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MantenimientoDTO"
+  /api/aviones:
+    get:
+      tags:
+      - avion-controller
+      operationId: obtenerAviones
+      parameters:
+      - name: modelo
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: enServicio
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: horasMax
+        in: query
+        required: false
+        schema:
+          type: number
+          format: float
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AvionDTO"
+    post:
+      tags:
+      - avion-controller
+      operationId: guardarAvion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Avion"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AvionDTO"
+  /api/vuelos/largos:
+    get:
+      tags:
+      - Vuelos
+      summary: Consultar vuelos largos (JPQL)
+      description: Obtiene vuelos cuya distancia supera los 5000km.
+      operationId: getVuelosLargos
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RegistroVueloDTO"
+  /api/vuelos/incidencias:
+    get:
+      tags:
+      - Vuelos
+      summary: Consultar vuelos con incidencias (SQL Nativo)
+      description: Obtiene vuelos que tienen el flag de incidencias activo.
+      operationId: getConIncidencias
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RegistroVueloDTO"
+  /api/piezas/stock-bajo:
+    get:
+      tags:
+      - pieza-controller
+      operationId: getStockBajo
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PiezaDTO"
+  /api/mecanicos/expertos:
+    get:
+      tags:
+      - mecanico-controller
+      operationId: getExpertos
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MecanicoDTO"
+  /api/mecanicos/caros-nuevos:
+    get:
+      tags:
+      - mecanico-controller
+      operationId: getCarosYNuevos
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MecanicoDTO"
+  /api/mantenimientos/top-caros:
+    get:
+      tags:
+      - mantenimiento-controller
+      operationId: getTopCaros
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MantenimientoDTO"
+  /api/mantenimientos/gasto-total:
+    get:
+      tags:
+      - mantenimiento-controller
+      operationId: getGastoTotal
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: number
+                  format: double
+  /api/aviones/grandes:
+    get:
+      tags:
+      - avion-controller
+      operationId: getAvionesGrandes
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AvionDTO"
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+    Avion:
+      required:
+      - horasVuelo
+      - matricula
+      - modelo
+      type: object
+      properties:
+        matricula:
+          pattern: "^[A-Z]{2}-\\d{3,4}$"
+          type: string
+        modelo:
+          type: string
+        capacidadPasajeros:
+          minimum: 1
+          type: integer
+          format: int32
+        horasVuelo:
+          type: number
+          format: float
+        enServicio:
+          type: boolean
+        fechaFabricacion:
+          type: string
+          format: date
+        mantenimientos:
+          type: array
+          items:
+            $ref: "#/components/schemas/Mantenimiento"
+        vuelos:
+          type: array
+          items:
+            $ref: "#/components/schemas/RegistroVuelo"
+    Mantenimiento:
+      required:
+      - codigoOrden
+      - fechaEntrada
+      type: object
+      properties:
+        codigoOrden:
+          type: string
+        descripcion:
+          maxLength: 500
+          minLength: 0
+          type: string
+        tiempoEstimadoHoras:
+          minimum: 1
+          type: integer
+          format: int32
+        costeTotal:
+          type: number
+          format: float
+        finalizado:
+          type: boolean
+        fechaEntrada:
+          type: string
+          format: date-time
+        avion:
+          $ref: "#/components/schemas/Avion"
+        mecanico:
+          $ref: "#/components/schemas/Mecanico"
+        piezasEmpleadas:
+          type: array
+          items:
+            $ref: "#/components/schemas/Pieza"
+    Mecanico:
+      required:
+      - licenciaId
+      - nombre
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        licenciaId:
+          type: string
+        nombre:
+          maxLength: 50
+          minLength: 2
+          type: string
+        nivelExperiencia:
+          maximum: 5
+          minimum: 0
+          type: integer
+          format: int32
+        salarioHora:
+          type: number
+          format: float
+        disponible:
+          type: boolean
+        fechaContratacion:
+          type: string
+          format: date-time
+        mantenimientosAsignados:
+          type: array
+          items:
+            $ref: "#/components/schemas/Mantenimiento"
+    Pieza:
+      required:
+      - nombre
+      - referencia
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        referencia:
+          type: string
+        nombre:
+          type: string
+        stock:
+          minimum: 0
+          type: integer
+          format: int32
+        precioUnitario:
+          type: number
+          format: float
+        esCritica:
+          type: boolean
+        fechaUltimaRevision:
+          type: string
+          format: date
+        mantenimientosDondeSeUso:
+          type: array
+          items:
+            $ref: "#/components/schemas/Mantenimiento"
+    RegistroVuelo:
+      required:
+      - codigoVuelo
+      - origenDestino
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        codigoVuelo:
+          type: string
+        origenDestino:
+          type: string
+        distanciaKm:
+          type: integer
+          format: int32
+        combustibleConsumido:
+          type: number
+          format: float
+        incidenciasReportadas:
+          type: boolean
+        fechaVuelo:
+          type: string
+          format: date
+        avion:
+          $ref: "#/components/schemas/Avion"
+    RegistroVueloDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Identificador único
+          format: int64
+          example: 10
+        codigoVuelo:
+          type: string
+          description: Código del vuelo
+          example: IB-3400
+        origenDestino:
+          type: string
+          description: Ruta
+          example: Madrid (MAD) - Londres (LHR)
+        distanciaKm:
+          type: integer
+          description: Distancia recorrida
+          format: int32
+          example: 1200
+        combustibleConsumido:
+          type: number
+          description: Litros de combustible
+          format: float
+          example: 5000.5
+        incidenciasReportadas:
+          type: boolean
+          description: Hubo problemas
+          example: false
+        fechaVuelo:
+          type: string
+          description: Fecha del vuelo
+          format: date
+          example: 2025-05-20
+        matriculaAvion:
+          type: string
+          description: Matrícula del avión asociado
+          example: EC-1234
+    PiezaDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        referencia:
+          type: string
+        nombre:
+          type: string
+        stock:
+          type: integer
+          format: int32
+        precioUnitario:
+          type: number
+          format: float
+        esCritica:
+          type: boolean
+        fechaUltimaRevision:
+          type: string
+          format: date
+        piezasEmpleadas:
+          type: integer
+          format: int32
+    MecanicoDTO:
+      type: object
+      properties:
+        licenciaId:
+          type: string
+        nombre:
+          type: string
+        nivelExperiencia:
+          type: integer
+          format: int32
+        salarioHora:
+          type: number
+          format: float
+        disponible:
+          type: boolean
+        fechaContratacion:
+          type: string
+          format: date-time
+        totalMantenimientosAsignados:
+          type: integer
+          format: int32
+    MantenimientoDTO:
+      type: object
+      properties:
+        codigoOrden:
+          type: string
+        descripcion:
+          type: string
+        tiempoEstimadoHoras:
+          type: integer
+          format: int32
+        costeTotal:
+          type: number
+          format: float
+        finalizado:
+          type: boolean
+        fechaEntrada:
+          type: string
+          format: date-time
+        matriculaAvion:
+          type: string
+    AvionDTO:
+      type: object
+      properties:
+        matricula:
+          type: string
+        modelo:
+          type: string
+        capacidadPasajeros:
+          type: integer
+          format: int32
+        horasVuelo:
+          type: number
+          format: float
+        enServicio:
+          type: boolean
+        fechaFabricacion:
+          type: string
+          format: date
+        totalMantenimientos:
+          type: integer
+          format: int32
+        totalVuelos:
+          type: integer
+          format: int32
