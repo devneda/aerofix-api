@@ -9,6 +9,30 @@
 			"name": "avion",
 			"item": [
 				{
+					"name": "aviones",
+					"id": "49958330-5c93bd92-6a46-4f9c-a875-247fd8703b31",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/aviones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"aviones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "grandes",
 					"id": "49958330-fdefe9fb-839f-4e6c-84c9-b19f7fef40d4",
 					"protocolProfileBehavior": {
@@ -34,8 +58,8 @@
 					"response": []
 				},
 				{
-					"name": "aviones",
-					"id": "49958330-5c93bd92-6a46-4f9c-a875-247fd8703b31",
+					"name": ":avionId",
+					"id": "49958330-bb615e4b-bc32-46b1-ad4c-5a7d1f4e281b",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -43,7 +67,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/aviones",
+							"raw": "http://localhost:8080/api/aviones/:avionId",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -51,7 +75,14 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"aviones"
+								"aviones",
+								":avionId"
+							],
+							"variable": [
+								{
+									"key": "avionId",
+									"value": "EC-5678"
+								}
 							]
 						}
 					},
@@ -116,37 +147,6 @@
 								{
 									"key": "avionId",
 									"value": "US-4325"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": ":avionId",
-					"id": "49958330-bb615e4b-bc32-46b1-ad4c-5a7d1f4e281b",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/aviones/:avionId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"aviones",
-								":avionId"
-							],
-							"variable": [
-								{
-									"key": "avionId",
-									"value": "EC-5678"
 								}
 							]
 						}
