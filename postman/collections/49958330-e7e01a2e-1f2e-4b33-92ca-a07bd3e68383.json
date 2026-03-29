@@ -81,7 +81,7 @@
 							"variable": [
 								{
 									"key": "avionId",
-									"value": "EC-5678"
+									"value": "EC-5679"
 								}
 							]
 						}
@@ -99,7 +99,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"matricula\": \"US-4325\", \r\n  \"modelo\": \"Airbus A320 Neo\",\r\n  \"capacidadPasajeros\": 240,\r\n  \"horasVuelo\": 200,\r\n  \"enServicio\": true,\r\n  \"fechaFabricacion\": \"2020-05-20\"\r\n}",
+							"raw": "{\r\n  \"matricula\": \"US-4673\", \r\n  \"modelo\": \"Airbus A320 Neo\",\r\n  \"capacidadPasajeros\": 240,\r\n  \"horasVuelo\": 9088,\r\n  \"enServicio\": true,\r\n  \"fechaFabricacion\": \"2020-05-20\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
