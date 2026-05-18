@@ -20,7 +20,7 @@ services:
       - network-aerofix
 
   aerofix-api:
-    build: .
+    image: aerofix-api
     container_name: aerofix-api
     ports:
       - "8080:8080"
