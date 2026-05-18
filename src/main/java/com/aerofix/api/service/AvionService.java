@@ -3,7 +3,9 @@ package com.aerofix.api.service;
 import com.aerofix.api.dto.AvionDTO;
 import com.aerofix.api.exception.AvionNotFoundException;
 import com.aerofix.api.model.Avion;
+import com.aerofix.api.model.AvionV2;
 import com.aerofix.api.repository.AvionRepository;
+import com.aerofix.api.repository.AvionRepositoryV2;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,10 @@ public class AvionService {
     private AvionRepository avionRepository;
 
     @Autowired
-    private ModelMapper modelMapper; // ¡Magia!
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private AvionRepositoryV2 avionRepositoryV2;
 
     // Guardar
     public AvionDTO guardarAvion(Avion avion) {
@@ -73,5 +78,34 @@ public class AvionService {
     // Métodos EXTRA para probar JPQL y Nativo
     public List<AvionDTO> buscarMuyUsados(float horas) {
         return modelMapper.map(avionRepository.findAvionesMuyUsados(horas), new TypeToken<List<AvionDTO>>() {}.getType());
+    }
+
+    // Métodos para el versionado V2
+    public AvionV2 guardadAvionV2(AvionV2 avionV2) {
+        return avionRepositoryV2.save(avionV2);
+    }
+
+    public List<AvionV2> findAllV2() {
+        return avionRepositoryV2.findAll();
+    }
+
+    public AvionV2 modificarAvionV2(String matricula, AvionV2 nuevosDatos) {
+        AvionV2 existente = avionRepositoryV2.findById(matricula)
+                .orElseThrow(() -> new AvionNotFoundException("Avión no encontrado"));
+
+        modelMapper.map(nuevosDatos, existente);
+        existente.setMatricula(matricula); // Protegemos la ID
+
+        return avionRepositoryV2.save(existente);
+    }
+
+    // En la V2 en lugar de borrar de la bbdd, hacemos un soft delete
+    // modificando el campo enServicio a false
+    public void eliminarAvionV2(String matricula) {
+        AvionV2 existente = avionRepositoryV2.findById(matricula)
+                .orElseThrow(() -> new AvionNotFoundException("Avión no encontrado"));
+
+        existente.setEnServicio(false);
+        avionRepositoryV2.save(existente);
     }
 }
