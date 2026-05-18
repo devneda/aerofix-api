@@ -11,8 +11,8 @@ import java.util.List;
 public class Avion {
 
     @Id
-    @NotBlank(message = "La matrícula es obligatoria") // Requisito: atributo obligatorio
-    @Pattern(regexp = "^[A-Z]{2}-\\d{3,4}$", message = "Formato de matrícula inválido (Ej: EC-123)") // Requisito: validación formato
+    @NotBlank(message = "La matrícula es obligatoria")
+    @Pattern(regexp = "^[A-Z]{2}-\\d{3,4}$", message = "Formato de matrícula inválido (Ej: EC-123)")
     private String matricula;
 
     @Column(columnDefinition = "VARCHAR(255)")
@@ -21,18 +21,18 @@ public class Avion {
 
     @Column
     @Min(value = 1, message = "La capacidad debe ser positiva")
-    private int capacidadPasajeros; // int
+    private int capacidadPasajeros;
 
     @Column
     @NotNull
-    private float horasVuelo; // float
+    private float horasVuelo;
 
     @Column
-    private boolean enServicio; // boolean
+    private boolean enServicio;
 
     @Column
     @PastOrPresent
-    private LocalDate fechaFabricacion; // fecha
+    private LocalDate fechaFabricacion;
 
     // Relaciones
     @OneToMany(mappedBy = "avion", cascade = CascadeType.ALL)
