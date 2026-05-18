@@ -1,0 +1,40 @@
+name: aerofix
+services:
+  aerofix-db:
+    image: mariadb:11.3.2
+    container_name: aerofix-db
+    restart: always
+    environment:
+      MYSQL_USER: ${MARIADB_USER}
+      MYSQL_PASSWORD: ${MARIADB_PASSWORD}
+      MYSQL_DATABASE: ${MARIADB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - network-aerofix
+
+  aerofix-api:
+    build: .
+    container_name: aerofix-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      aerofix-db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_URL: jdbc:mariadb://aerofix-db:3306/${MARIADB_DATABASE}
+      DB_USER: ${MARIADB_USER}
+      DB_PASSWORD: ${MARIADB_PASSWORD}
+    networks:
+      - network-aerofix
+
+networks:
+  network-aerofix:
+    driver: bridge
