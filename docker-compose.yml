@@ -29,7 +29,7 @@ services:
         condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      DB_URL: jdbc:mariadb://aerofix-db:3306/${MARIADB_DATABASE}
+      DB_URL: ${DB_URL}
       DB_USER: ${MARIADB_USER}
       DB_PASSWORD: ${MARIADB_PASSWORD}
     networks:
