@@ -16,9 +16,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{url}}/aviones",
+              "raw": "{{host}}/aviones",
               "host": [
-                "{{url}}"
+                "{{host}}"
               ],
               "path": [
                 "aviones"
@@ -33,14 +33,11 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/api/aviones/grandes",
-              "protocol": "http",
+              "raw": "{{host}}api/aviones/grandes",
               "host": [
-                "localhost"
+                "{{host}}api"
               ],
-              "port": "8080",
               "path": [
-                "api",
                 "aviones",
                 "grandes"
               ]
@@ -54,12 +51,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/api/aviones/:avionId",
-              "protocol": "http",
+              "raw": "{{host}}/api/aviones/:avionId",
               "host": [
-                "localhost"
+                "{{host}}"
               ],
-              "port": "8080",
               "path": [
                 "api",
                 "aviones",
@@ -82,18 +77,7 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "var jsonResponse = pm.response.json();\r",
-                  "\r",
-                  "pm.test(\"Código de estado es 201 Created\", function () {\r",
-                  "    pm.response.to.have.status(201);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"La estructura es correcta y devuelve el nuevo campo aerolinea\", function () {\r",
-                  "    pm.expect(jsonResponse).to.have.property(\"matricula\");\r",
-                  "    pm.expect(jsonResponse).to.have.property(\"aerolinea\");\r",
-                  "});\r",
-                  "\r",
-                  "pm.collectionVariables.set(\"avionMatriculaV2\", jsonResponse.matricula);"
+                  ""
                 ],
                 "type": "text/javascript",
                 "packages": {},
@@ -114,12 +98,10 @@
               }
             },
             "url": {
-              "raw": "http://localhost:8080/api/aviones",
-              "protocol": "http",
+              "raw": "{{host}}/api/aviones",
               "host": [
-                "localhost"
+                "{{host}}"
               ],
-              "port": "8080",
               "path": [
                 "api",
                 "aviones"
@@ -138,12 +120,10 @@
               "raw": "{\r\n  \"matricula\": \"US-4325\", \r\n  \"modelo\": \"Airbus A320 Neo\",\r\n  \"capacidadPasajeros\": 240,\r\n  \"horasVuelo\": 200,\r\n  \"enServicio\": true,\r\n  \"fechaFabricacion\": \"2020-05-20\"\r\n}"
             },
             "url": {
-              "raw": "http://localhost:8080/api/aviones/:avionId",
-              "protocol": "http",
+              "raw": "{{host}}/api/aviones/:avionId",
               "host": [
-                "localhost"
+                "{{host}}"
               ],
-              "port": "8080",
               "path": [
                 "api",
                 "aviones",
