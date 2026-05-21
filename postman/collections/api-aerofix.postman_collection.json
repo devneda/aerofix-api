@@ -33,11 +33,12 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{host}}api/aviones/grandes",
+              "raw": "{{host}}/api/aviones/grandes",
               "host": [
-                "{{host}}api"
+                "{{host}}"
               ],
               "path": [
+                "api",
                 "aviones",
                 "grandes"
               ]
