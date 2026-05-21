@@ -20,18 +20,30 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Crear archivo .env temporal para GitHub Actions
+        run: |
+          echo "SPRING_PROFILES_ACTIVE=dev" >> .env
+          echo "DB_URL=jdbc:postgresql://localhost:5432/aerofix_db" >> .env
+          echo "DB_USER=aerofix_user" >> .env
+          echo "DB_PASSWORD=aerofix_pass" >> .env
+          echo "POSTGRES_DB=aerofix_db" >> .env
+          echo "POSTGRES_USER=aerofix_user" >> .env
+          echo "POSTGRES_PASSWORD=aerofix_pass" >> .env
+
       - name: Levantar base de datos de pruebas (PostgreSQL)
-        run: docker-compose -f docker-compose-dev.yaml up -d
+        run: docker compose -f docker-compose-dev.yaml up -d
 
       - name: Esperar a que la BD esté lista
         run: sleep 10
 
       - name: Arrancar la API de Spring Boot
         run: |
+          # Le damos permisos de ejecución al wrapper de Maven por si acaso
+          chmod +x mvnw
           # Arrancamos la API en segundo plano con el perfil de desarrollo
           ./mvnw spring-boot:run "-Dspring.profiles.active=dev" &
-          # Esperamos unos segundos para que Spring Boot levante completamente en el puerto 8080
-          sleep 25
+          # Esperamos unos segundos para que Spring Boot levante completamente
+          sleep 30
 
       - name: Instalar Node.js y Newman
         uses: actions/setup-node@v3
