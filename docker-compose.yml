@@ -20,7 +20,9 @@ services:
       - network-aerofix
 
   aerofix-api:
-    image: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: aerofix-api
     ports:
       - "8080:8080"
