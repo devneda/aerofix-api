@@ -1,0 +1,51 @@
+name: API Testing con Newman
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+
+    env:
+      SPRING_PROFILES_ACTIVE: dev
+      DB_URL: jdbc:postgresql://localhost:5432/aerofix_db
+      DB_USER: aerofix_user
+      DB_PASSWORD: aerofix_pass
+      POSTGRES_DB: aerofix_db
+      POSTGRES_USER: aerofix_user
+      POSTGRES_PASSWORD: aerofix_pass
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Configurar Java 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Levantar base de datos de pruebas (PostgreSQL)
+        run: docker compose -f docker-compose-dev.yaml up -d
+
+      - name: Esperar a que la BD esté lista
+        run: sleep 15
+
+      - name: Arrancar la API de Spring Boot
+        run: |
+          chmod +x mvnw
+          ./mvnw spring-boot:run &
+          sleep 30
+
+      - name: Instalar Node.js y Newman
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm install -g newman
+
+      - name: Ejecutar Tests de Postman
+        run: newman run postman/collections/api-aerofix.postman_collection.json --env-var "host=http://localhost:8080"
