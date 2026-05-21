@@ -38,13 +38,15 @@ services:
       - network-aerofix
 
   apiman:
-    image: apiman/on-wildfly:latest
+    image: apiman/gateway:latest
     container_name: apiman
     ports:
       - "8081:8080"  # APIMan responderá en el puerto 8081 para no chocar con la API
       - "8444:8443"
     networks:
       - network-aerofix
+    environment:
+      APIMAN_GATEWAY_ENDPOINT_TYPE: rest
 
 networks:
   network-aerofix:
