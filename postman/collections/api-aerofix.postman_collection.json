@@ -1,0 +1,1110 @@
+{
+  "info": {
+    "_postman_id": "e7e01a2e-1f2e-4b33-92ca-a07bd3e68383",
+    "name": "api-aerofix",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49958330",
+    "_collection_link": "https://go.postman.co/collection/49958330-e7e01a2e-1f2e-4b33-92ca-a07bd3e68383?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "avion",
+      "item": [
+        {
+          "name": "aviones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/aviones",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "aviones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "grandes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/aviones/grandes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "aviones",
+                "grandes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":avionId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/aviones/:avionId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "aviones",
+                ":avionId"
+              ],
+              "variable": [
+                {
+                  "key": "avionId",
+                  "value": "EC-5679"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "avion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonResponse = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Código de estado es 201 Created\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"La estructura es correcta y devuelve el nuevo campo aerolinea\", function () {\r",
+                  "    pm.expect(jsonResponse).to.have.property(\"matricula\");\r",
+                  "    pm.expect(jsonResponse).to.have.property(\"aerolinea\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.collectionVariables.set(\"avionMatriculaV2\", jsonResponse.matricula);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"matricula\": \"US-4673\", \r\n  \"modelo\": \"Airbus A320 Neo\",\r\n  \"capacidadPasajeros\": 240,\r\n  \"horasVuelo\": 9088,\r\n  \"enServicio\": true,\r\n  \"fechaFabricacion\": \"2020-05-20\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/aviones",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "aviones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":avionId",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"matricula\": \"US-4325\", \r\n  \"modelo\": \"Airbus A320 Neo\",\r\n  \"capacidadPasajeros\": 240,\r\n  \"horasVuelo\": 200,\r\n  \"enServicio\": true,\r\n  \"fechaFabricacion\": \"2020-05-20\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/aviones/:avionId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "aviones",
+                ":avionId"
+              ],
+              "variable": [
+                {
+                  "key": "avionId",
+                  "value": "US-4325"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "avion v2",
+      "item": [
+        {
+          "name": "aviones v2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Código de estado es 200 OK\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"La respuesta es un array de aviones\", function () {\r",
+                  "    var jsonResponse = pm.response.json();\r",
+                  "    pm.expect(jsonResponse).to.be.an(\"array\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v2/aviones",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "aviones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "avion v2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonResponse = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Código de estado es 201 Created\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"La estructura es correcta y devuelve el nuevo campo aerolinea\", function () {\r",
+                  "    pm.expect(jsonResponse).to.have.property(\"matricula\");\r",
+                  "    pm.expect(jsonResponse).to.have.property(\"aerolinea\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.collectionVariables.set(\"avionMatriculaV2\", jsonResponse.matricula);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"randomId\", _.random(100, 999));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"matricula\": \"EC-{{randomId}}\",\r\n  \"modelo\": \"Airbus A320 Neo\",\r\n  \"capacidadPasajeros\": 174,\r\n  \"horasVuelo\": 0.0,\r\n  \"enServicio\": true,\r\n  \"fechaFabricacion\": \"2025-05-18\",\r\n  \"aerolinea\": \"Iberia Express\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v2/aviones",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "aviones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "avion v2 Error400",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Código de estado es 400 Bad Request por validación\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Devuelve estructura de error con mensaje\", function () {\r",
+                  "    var jsonResponse = pm.response.json();\r",
+                  "    pm.expect(jsonResponse).to.have.property(\"timestamp\");\r",
+                  "    pm.expect(jsonResponse).to.have.property(\"status\");\r",
+                  "    pm.expect(jsonResponse).to.have.property(\"error\");\r",
+                  "    pm.expect(jsonResponse).to.have.property(\"path\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"modelo\": \"Airbus A320 Neo\",\r\n  \"capacidadPasajeros\": 180,\r\n  \"horasVuelo\": 0.0,\r\n  \"enServicio\": true,\r\n  \"fechaFabricacion\": \"2024-05-18\",\r\n  \"aerolinea\": \"Iberia Express\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v2/aviones",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "aviones"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "avion v2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonResponse = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Código de estado es 200 OK\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"La aerolínea se ha actualizado correctamente\", function () {\r",
+                  "    var requestBody = JSON.parse(pm.request.body.raw);\r",
+                  "    pm.expect(jsonResponse.aerolinea).to.eql(requestBody.aerolinea);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"matricula\": \"{{avionMatriculaV2}}\",\r\n  \"modelo\": \"Airbus A320 Neo\",\r\n  \"capacidadPasajeros\": 180,\r\n  \"horasVuelo\": 190,\r\n  \"enServicio\": true,\r\n  \"fechaFabricacion\": \"2024-05-18\",\r\n  \"aerolinea\": \"Vueling\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/v2/aviones/{{avionMatriculaV2}}",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "aviones",
+                "{{avionMatriculaV2}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "avion v2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Código de estado es 204 No Content (Borrado Lógico exitoso)\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/v2/aviones/{{avionMatriculaV2}}",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "aviones",
+                "{{avionMatriculaV2}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "mantenimiento",
+      "item": [
+        {
+          "name": "mantenimientos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":mantenimientoId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos/:mantenimientoId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos",
+                ":mantenimientoId"
+              ],
+              "variable": [
+                {
+                  "key": "mantenimientoId",
+                  "value": "ORD-NUEVA-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "gasto-total",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos/gasto-total",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos",
+                "gasto-total"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "top-caros",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos/top-caros",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos",
+                "top-caros"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "mantenimientos?",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos?descripcion=frenos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos"
+              ],
+              "query": [
+                {
+                  "key": "descripcion",
+                  "value": "frenos"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "mantenimientos",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"codigoOrden\": \"ORD-NUEVA-01\",\r\n    \"descripcion\": \"Revisión completa de frenos y aceite\",\r\n    \"tiempoEstimadoHoras\": 5,\r\n    \"costeTotal\": 1500.50,\r\n    \"finalizado\": false,\r\n    \"fechaEntrada\": \"2025-01-20T08:00:00\",\r\n    \"avion\": {\r\n        \"matricula\": \"EC-1234\"\r\n    },\r\n    \"mecanico\": {\r\n        \"id\": 1\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":mantenimiento",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"descripcion\": \"Revisión completa de frenos FINALIZADA\",\r\n    \"costeTotal\": 2000.00,\r\n    \"finalizado\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos/:mantenimiento",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos",
+                ":mantenimiento"
+              ],
+              "variable": [
+                {
+                  "key": "mantenimiento",
+                  "value": "ORD-NUEVA-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":mantenimiento",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mantenimientos/:mantenimiento",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mantenimientos",
+                ":mantenimiento"
+              ],
+              "variable": [
+                {
+                  "key": "mantenimiento",
+                  "value": "ORD-NUEVA-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "mecanico",
+      "item": [
+        {
+          "name": "mecanicos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mecanicos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mecanicos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":mecanicoId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mecanicos/:mecanicoId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mecanicos",
+                ":mecanicoId"
+              ],
+              "variable": [
+                {
+                  "key": "mecanicoId",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "caros-nuevos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mecanicos/caros-nuevos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mecanicos",
+                "caros-nuevos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "mecanicos",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"licenciaId\": \"LIC-4999\",\r\n  \"nombre\": \"Sergio Peinado\",\r\n  \"nivelExperiencia\": 5,\r\n  \"salarioHora\": 36.50,\r\n  \"disponible\": true,\r\n  \"fechaContratacion\": \"2024-04-20\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/mecanicos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mecanicos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "mecanico",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"licenciaId\": \"LIC-3492\",\r\n  \"nombre\": \"Kenny Pineda\",\r\n  \"nivelExperiencia\": 5,\r\n  \"salarioHora\": 40.00,\r\n  \"disponible\": true,\r\n  \"fechaContratacion\": \"2020-04-20\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/mecanicos/:mecanicoId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "mecanicos",
+                ":mecanicoId"
+              ],
+              "variable": [
+                {
+                  "key": "mecanicoId",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "pieza",
+      "item": [
+        {
+          "name": "pieza",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/piezas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "piezas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":piezaReferencia",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/piezas/:piezaReferencia",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "piezas",
+                ":piezaReferencia"
+              ],
+              "variable": [
+                {
+                  "key": "piezaReferencia",
+                  "value": "ARP-FX1500"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "pieza",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"referencia\": \"REF-TEST-01\",\r\n    \"nombre\": \"Filtro de Aceite Avanzado\",\r\n    \"stock\": 50,\r\n    \"precioUnitario\": 120.50,\r\n    \"esCritica\": true,\r\n    \"fechaUltimaRevision\": \"2024-01-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/piezas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "piezas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":piezaId",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"precioUnitario\": 1000.00,\r\n    \"esCritica\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/piezas/:piezaId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "piezas",
+                ":piezaId"
+              ],
+              "variable": [
+                {
+                  "key": "piezaId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "pieza?nombre",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/piezas?nombre=Filtro&esCritica=true",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "piezas"
+              ],
+              "query": [
+                {
+                  "key": "nombre",
+                  "value": "Filtro"
+                },
+                {
+                  "key": "esCritica",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "stock-bajo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/piezas/stock-bajo",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "piezas",
+                "stock-bajo"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "registroVuelo",
+      "item": [
+        {
+          "name": "registroVuelos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/vuelos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "vuelos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":registroId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/vuelos/:registroId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "vuelos",
+                ":registroId"
+              ],
+              "variable": [
+                {
+                  "key": "registroId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "registroVuelo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"codigoVuelo\": \"IB-9999\",\r\n    \"origenDestino\": \"Madrid (MAD) - New York (JFK)\",\r\n    \"fechaSalida\": \"2025-06-20T14:00:00\",\r\n    \"fechaLlegada\": \"2025-06-20T22:00:00\",\r\n    \"distanciaKm\": 6000,\r\n    \"avion\": {\r\n        \"matricula\": \"EC-1234\" \r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/vuelos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "vuelos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": ":registroId",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"codigoVuelo\": \"IB-3400\",\r\n  \"origenDestino\": \"MAD-CDG\",\r\n  \"distanciaKm\": 1200,\r\n  \"combustibleConsumido\": 5000.5,\r\n  \"incidenciasReportadas\": true,\r\n  \"fechaVuelo\": \"2025-10-20\",\r\n  \"avion\": {\r\n    \"matricula\": \"ES-1024\" \r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/vuelos/:registroId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "vuelos",
+                ":registroId"
+              ],
+              "variable": [
+                {
+                  "key": "registroId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "incidencias",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/vuelos/incidencias",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "vuelos",
+                "incidencias"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "avionMatriculaV2",
+      "value": "OP-7686"
+    },
+    {
+      "key": "host",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
