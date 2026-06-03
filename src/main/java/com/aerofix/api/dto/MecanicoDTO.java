@@ -12,6 +12,9 @@ public class MecanicoDTO {
     private float salarioHora;
     private boolean disponible;
     private Date fechaContratacion;
+    private Double latitud;
+    private Double longitud;
+    private String fotoUrl;
 
     // Campo informativo
     private int totalMantenimientosAsignados;

@@ -34,6 +34,10 @@ public class Avion {
     @PastOrPresent
     private LocalDate fechaFabricacion;
 
+    private Double latitud;
+    private Double longitud;
+    private String imagenUrl;
+
     // Relaciones
     @OneToMany(mappedBy = "avion", cascade = CascadeType.ALL)
     private List<Mantenimiento> mantenimientos;
