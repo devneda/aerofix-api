@@ -1,53 +1,46 @@
-name: aerofix
+name: aerofix-prod
 services:
-  aerofix-db:
+  db-prod:
     image: mariadb:11.3.2
-    container_name: aerofix-db
+    container_name: aerofix-db-prod
     restart: always
+    env_file:
+      - .env
     environment:
       MYSQL_USER: ${MARIADB_USER}
       MYSQL_PASSWORD: ${MARIADB_PASSWORD}
       MYSQL_DATABASE: ${MARIADB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
     ports:
-      - "3306:3306"
+      - "3307:3306"
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 10s
       timeout: 5s
       retries: 3
     networks:
-      - network-aerofix
+      - network-aerofix-prod
 
-  aerofix-api:
+  api-prod:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: aerofix-api
+    container_name: aerofix-api-prod
     ports:
       - "8080:8080"
     depends_on:
-      aerofix-db:
+      db-prod:
         condition: service_healthy
+    env_file:
+      - .env
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      DB_URL: ${DB_URL}
+      DB_URL: jdbc:mariadb://db-prod:3306/aerofix_db
       DB_USER: ${MARIADB_USER}
       DB_PASSWORD: ${MARIADB_PASSWORD}
     networks:
-      - network-aerofix
-
-  apiman:
-    image: apiman/gateway:latest
-    container_name: apiman
-    ports:
-      - "8081:8080"  # APIMan responderá en el puerto 8081 para no chocar con la API
-      - "8444:8443"
-    networks:
-      - network-aerofix
-    environment:
-      APIMAN_GATEWAY_ENDPOINT_TYPE: rest
+      - network-aerofix-prod
 
 networks:
-  network-aerofix:
+  network-aerofix-prod:
     driver: bridge

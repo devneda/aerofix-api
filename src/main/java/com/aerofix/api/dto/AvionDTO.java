@@ -11,6 +11,9 @@ public class AvionDTO {
     private float horasVuelo;
     private boolean enServicio;
     private LocalDate fechaFabricacion;
+    private Double latitud;
+    private Double longitud;
+    private String imagenUrl;
 
     // Campos calculados (informativos)
     private int totalMantenimientos;

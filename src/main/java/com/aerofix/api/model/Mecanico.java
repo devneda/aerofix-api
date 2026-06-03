@@ -34,6 +34,10 @@ public class Mecanico {
     @Temporal(TemporalType.DATE)
     private Date fechaContratacion;
 
+    private Double latitud;
+    private Double longitud;
+    private String fotoUrl;
+
     @OneToMany(mappedBy = "mecanico")
     private List<Mantenimiento> mantenimientosAsignados;
 }
