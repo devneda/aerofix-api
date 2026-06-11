@@ -35,6 +35,7 @@ public class RegistroVuelo {
 
     @Column
     @PastOrPresent
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaVuelo;
 
     @ManyToOne

@@ -34,6 +34,7 @@ public class Pieza {
     private Boolean esCritica; // Wrapper
 
     @Column
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaUltimaRevision;
 
     @ManyToMany(mappedBy = "piezasEmpleadas")

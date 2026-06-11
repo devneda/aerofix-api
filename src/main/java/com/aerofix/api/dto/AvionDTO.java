@@ -10,6 +10,7 @@ public class AvionDTO {
     private int capacidadPasajeros;
     private float horasVuelo;
     private boolean enServicio;
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaFabricacion;
     private Double latitud;
     private Double longitud;

@@ -32,6 +32,7 @@ public class Avion {
 
     @Column
     @PastOrPresent
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaFabricacion;
 
     private Double latitud;

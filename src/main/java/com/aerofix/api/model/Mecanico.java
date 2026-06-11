@@ -32,6 +32,7 @@ public class Mecanico {
     private Boolean disponible;
 
     @Temporal(TemporalType.DATE)
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechaContratacion;
 
     private Double latitud;

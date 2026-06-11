@@ -24,6 +24,7 @@ public class AvionV2 {
     private int capacidadPasajeros;
     private float horasVuelo;
     private boolean enServicio;
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaFabricacion;
 
     // Nuevo campo para la V2

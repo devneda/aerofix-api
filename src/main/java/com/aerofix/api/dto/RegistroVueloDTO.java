@@ -26,6 +26,7 @@ public class RegistroVueloDTO {
     private boolean incidenciasReportadas;
 
     @Schema(description = "Fecha del vuelo", example = "2025-05-20")
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaVuelo;
 
     @Schema(description = "Matrícula del avión asociado", example = "EC-1234")

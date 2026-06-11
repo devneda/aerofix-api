@@ -11,7 +11,8 @@ public class MecanicoDTO {
     private int nivelExperiencia;
     private float salarioHora;
     private boolean disponible;
-    private Date fechaContratacion;
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd")
+    private java.util.Date fechaContratacion;
     private Double latitud;
     private Double longitud;
     private String fotoUrl;
