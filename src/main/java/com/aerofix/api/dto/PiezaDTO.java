@@ -11,6 +11,7 @@ public class PiezaDTO {
     private int stock;
     private float precioUnitario;
     private boolean esCritica;
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaUltimaRevision;
     private int piezasEmpleadas;
 }

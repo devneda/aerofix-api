@@ -31,6 +31,7 @@ public class Mantenimiento {
 
     @Column
     @NotNull
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaEntrada; // fecha
 
     // Relaciones

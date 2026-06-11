@@ -59,8 +59,6 @@ public class AvionController {
         return ResponseEntity.noContent().build();
     }
 
-    // --- EXCEPTION HANDLERS (Estilo Profesor) ---
-
     @ExceptionHandler(AvionNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFound(AvionNotFoundException ex) {
         return new ResponseEntity<>(ErrorResponse.generalError(ex.getMessage()), HttpStatus.NOT_FOUND);
