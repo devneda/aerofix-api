@@ -47,6 +47,12 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/RegistroVueloDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
       - Vuelos
@@ -86,6 +92,12 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/RegistroVueloDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
       - Vuelos
@@ -115,6 +127,12 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
         "204":
           description: Vuelo eliminado correctamente
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/v2/aviones/{matricula}:
     put:
       tags:
@@ -139,6 +157,12 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/AvionV2"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
       - avion-controller-v-2
@@ -152,6 +176,12 @@ paths:
       responses:
         "200":
           description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/piezas/{id}:
     get:
       tags:
@@ -171,6 +201,24 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/PiezaDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
       - pieza-controller
@@ -195,6 +243,12 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/PiezaDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
       - pieza-controller
@@ -209,6 +263,12 @@ paths:
       responses:
         "200":
           description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/mecanicos/{id}:
     get:
       tags:
@@ -228,6 +288,24 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/MecanicoDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
       - mecanico-controller
@@ -252,6 +330,12 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/MecanicoDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
       - mecanico-controller
@@ -266,6 +350,12 @@ paths:
       responses:
         "200":
           description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/mantenimientos/{codigoOrden}:
     get:
       tags:
@@ -284,6 +374,24 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/MantenimientoDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
       - mantenimiento-controller
@@ -307,6 +415,12 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/MantenimientoDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
       - mantenimiento-controller
@@ -320,6 +434,12 @@ paths:
       responses:
         "200":
           description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/aviones/{matricula}:
     get:
       tags:
@@ -338,6 +458,24 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/AvionDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     put:
       tags:
       - avion-controller
@@ -361,6 +499,12 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/AvionDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
       - avion-controller
@@ -374,13 +518,19 @@ paths:
       responses:
         "200":
           description: OK
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/vuelos:
     get:
       tags:
       - Vuelos
       summary: Obtener lista de vuelos
-      description: "Devuelve todos los vuelos registrados. Permite filtrar por destino,\
-        \ incidencias o código parcial."
+      description: "Devuelve todos los vuelos registrados. Permite filtrar por destino,
+        incidencias o código parcial."
       operationId: obtenerTodos
       parameters:
       - name: destino
@@ -391,7 +541,8 @@ paths:
           type: string
       - name: incidencias
         in: query
-        description: Filtra vuelos según si han reportado incidencias (true/false)
+        description: Filtra vuelos según si han reportado incidencias 
+          (true/false)
         required: false
         schema:
           type: boolean
@@ -430,8 +581,8 @@ paths:
       tags:
       - Vuelos
       summary: Registrar nuevo vuelo
-      description: Crea un nuevo registro de vuelo y lo asocia a un avión existente
-        mediante su matrícula.
+      description: Crea un nuevo registro de vuelo y lo asocia a un avión 
+        existente mediante su matrícula.
       operationId: guardar
       requestBody:
         content:
@@ -458,6 +609,12 @@ paths:
             '*/*':
               schema:
                 $ref: "#/components/schemas/RegistroVueloDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/v2/aviones:
     get:
       tags:
@@ -472,6 +629,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/AvionV2"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     post:
       tags:
       - avion-controller-v-2
@@ -483,12 +658,18 @@ paths:
               $ref: "#/components/schemas/AvionV2"
         required: true
       responses:
-        "200":
-          description: OK
+        '202':
+          description: Created
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/AvionV2"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/piezas:
     get:
       tags:
@@ -520,6 +701,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/PiezaDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     post:
       tags:
       - pieza-controller
@@ -531,12 +730,18 @@ paths:
               $ref: "#/components/schemas/Pieza"
         required: true
       responses:
-        "200":
-          description: OK
+        '202':
+          description: Created
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/PiezaDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/mecanicos:
     get:
       tags:
@@ -568,6 +773,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/MecanicoDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     post:
       tags:
       - mecanico-controller
@@ -579,12 +802,18 @@ paths:
               $ref: "#/components/schemas/Mecanico"
         required: true
       responses:
-        "200":
-          description: OK
+        '202':
+          description: Created
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/MecanicoDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/mantenimientos:
     get:
       tags:
@@ -616,6 +845,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/MantenimientoDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     post:
       tags:
       - mantenimiento-controller
@@ -627,12 +874,18 @@ paths:
               $ref: "#/components/schemas/Mantenimiento"
         required: true
       responses:
-        "200":
-          description: OK
+        '202':
+          description: Created
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/MantenimientoDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/aviones:
     get:
       tags:
@@ -664,6 +917,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/AvionDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     post:
       tags:
       - avion-controller
@@ -675,12 +946,18 @@ paths:
               $ref: "#/components/schemas/Avion"
         required: true
       responses:
-        "200":
-          description: OK
+        '202':
+          description: Created
           content:
             '*/*':
               schema:
                 $ref: "#/components/schemas/AvionDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/vuelos/largos:
     get:
       tags:
@@ -709,6 +986,12 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/RegistroVueloDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/vuelos/incidencias:
     get:
       tags:
@@ -737,6 +1020,12 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/RegistroVueloDTO"
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/piezas/stock-bajo:
     get:
       tags:
@@ -751,6 +1040,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/PiezaDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/mecanicos/expertos:
     get:
       tags:
@@ -765,6 +1072,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/MecanicoDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/mecanicos/caros-nuevos:
     get:
       tags:
@@ -779,6 +1104,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/MecanicoDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/mantenimientos/top-caros:
     get:
       tags:
@@ -793,6 +1136,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/MantenimientoDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/mantenimientos/gasto-total:
     get:
       tags:
@@ -808,6 +1169,24 @@ paths:
                 additionalProperties:
                   type: number
                   format: double
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /api/aviones/grandes:
     get:
       tags:
@@ -822,6 +1201,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/AvionDTO"
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
     ErrorResponse:
